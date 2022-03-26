@@ -11,73 +11,46 @@ import Entity.RoomService;
 import Entity.MenuItem;
 
 /**
- * @author BHAT SACHIN <SACHIN008@e.ntu.edu.sg>
  *
  */
 public class RoomServiceManager {
-	/**
-     * Default constructor
-     */
-    public RoomServiceManager() {
-    }
-
-    /**
-     * 
-     */
+	
     private ArrayList<RoomService> rsList;
-
-    /**
-     * 
-     */
     private FileIOHandler fileIO;
-
-    /**
-     * 
-     */
     private int count = 1;
-
-    /**
-     * 
-     */
     private Scanner sc;
-
-    /**
-     * @param sc
-     */
+    
+    public RoomServiceManager() {
+    	
+    }
     public void RoomServiceManager(Scanner sc) {
         // TODO implement here
     }
 
-    /**
-     * @param mList 
-     * @return
-     */
     public RoomService orderRoomService(ArrayList<MenuItem> mList) {
-        // TODO implement here
+        RoomService rs = new RoomService(mList, dateTime, remarks, rsList.size());
+        rsList.add(rs);
+        return rs;
         return null;
     }
-
-    /**
-     * @param rs 
-     * @return
-     */
+    
     public void removeRoomService(RoomService rs) {
-        // TODO implement here
+        int id = rs.getId();
+        RoomService temp;
+        rsList.remove(id);
+        for(int i=id;i<rsList.size();i++) {
+        	temp = rsList.get(i);
+        	temp.setId(id);
+        	rsList.set(i, temp);
+        }
         return;
     }
-
-    /**
-     * @param rs 
-     * @return
-     */
+    
     public void updateRoomService(RoomService rs) {
         // TODO implement here
         return;
     }
-
-    /**
-     * @return
-     */
+    
     private void updateRoomServiceMenu() {
         // TODO implement here
         return;
@@ -98,7 +71,6 @@ public class RoomServiceManager {
      * @return
      */
     public RoomService getRoomServiceById(int id) {
-        // TODO implement here
-        return null;
+        return rsList.get(id);
     }
 }
