@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package Entity;
 
@@ -45,7 +45,7 @@ public class Guest implements Serializable {
     /**
      * 
      */
-    private String addresss;
+    private String address;
 
     /**
      * 
@@ -78,159 +78,97 @@ public class Guest implements Serializable {
      * @param contactNo
      */
     public void Guest(int guestId, String id, String name, String address, String country, char gender, String nationality, long contactNo) {
-        // TODO implement here
+        this.guestId = guestId;
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.country = country;
+        this.gender = gender;
+        this.nationality = nationality;
+        this.contactNo = contactNo;
     }
-
+    //SETTER METHODS
     /**
      * @param guestId 
      * @return
      */
-    public void setGuestId(int guestId) {
-        // TODO implement here
-        return;
-    }
-
+    public void setGuestId(int guestId) {this.guestId = guestId;}
     /**
      * @param id 
      * @return
      */
-    public void setId(String id) {
-        // TODO implement here
-        return;
-    }
-
+    public void setId(String id) {this.id = id;}
     /**
      * @param name 
      * @return
      */
-    public void setName(String name) {
-        // TODO implement here
-        return;
-    }
-
+    public void setName(String name) {this.name = name;}
     /**
      * @param card 
      * @return
      */
-    public void setCreditCard(CreditCard card) {
-        // TODO implement here
-        return;
-    }
-
+    public void setCreditCard(CreditCard card) {this.card = card;}
     /**
      * @param address 
      * @return
      */
-    public void setAddress(String address) {
-        // TODO implement here
-        return;
-    }
-
+    public void setAddress(String address) {this.address = address;}
     /**
      * @param country 
      * @return
      */
-    public void setCountry(String country) {
-        // TODO implement here
-        return;
-    }
-
+    public void setCountry(String country) {this.country = country;}
     /**
      * @param gender 
      * @return
      */
-    public void setGender(char gender) {
-        // TODO implement here
-        return;
-    }
-
+    public void setGender(char gender) {this.gender = gender;}
     /**
      * @param nationality 
      * @return
      */
-    public void setNationality(String nationality) {
-        // TODO implement here
-        return;
-    }
-
+    public void setNationality(String nationality) {this.nationality = nationality;}
     /**
      * @param contactNo 
      * @return
      */
-    public void setContactNo(long contactNo) {
-        // TODO implement here
-        return;
-    }
+    public void setContactNo(long contactNo) {this.contactNo = contactNo;}
 
+    //GETTER METHODS
     /**
      * @return
      */
-    public int getGuestId() {
-        // TODO implement here
-        return 0;
-    }
-
+    public int getGuestId() {return guestId;}
     /**
      * @return
      */
-    public String getId() {
-        // TODO implement here
-        return "";
-    }
-
+    public String getId() {return id;}
     /**
      * @return
      */
-    public String getName() {
-        // TODO implement here
-        return "";
-    }
-
+    public String getName() {return name;}
     /**
      * @return
      */
-    public CreditCard getCreditCard() {
-        // TODO implement here
-        return null;
-    }
-
+    public CreditCard getCreditCard() {return card;}
     /**
      * @return
      */
-    public String getAddress() {
-        // TODO implement here
-        return "";
-    }
-
+    public String getAddress() {return address;}
     /**
      * @return
      */
-    public String getCountry() {
-        // TODO implement here
-        return "";
-    }
-
+    public String getCountry() {return country;}
     /**
      * @return
      */
-    public char getGender() {
-        // TODO implement here
-        return '0';
-    }
-
+    public char getGender() {return gender;}
     /**
      * @return
      */
-    public String getNationality() {
-        // TODO implement here
-        return "";
-    }
-
+    public String getNationality() {return nationality;}
     /**
      * @return
      */
-    public long getContactNo() {
-        // TODO implement here
-        return 0;
-    }
+    public long getContactNo() {return contactNo;}
 }
