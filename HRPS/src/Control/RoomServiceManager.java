@@ -11,34 +11,13 @@ import Entity.RoomService;
 import Entity.MenuItem;
 
 /**
- * @author BHAT SACHIN <SACHIN008@e.ntu.edu.sg>
  *
  */
 public class RoomServiceManager {
-	/**
-     * Default constructor
-     */
-    public RoomServiceManager() {
-    }
-
-    /**
-     * 
-     */
+	
     private ArrayList<RoomService> rsList;
-
-    /**
-     * 
-     */
     private FileIOHandler fileIO;
-
-    /**
-     * 
-     */
     private int count = 1;
-
-    /**
-     * 
-     */
     private Scanner sc;
 
     /**
@@ -59,11 +38,21 @@ public class RoomServiceManager {
      * @param mList 
      * @return
      */
-    public RoomService orderRoomService(ArrayList<MenuItem> mList) {
+    
+    public RoomServiceManager() {
+    	
+    }
+    public void RoomServiceManager(Scanner sc) {
         // TODO implement here
-        return null;
     }
 
+    public RoomService orderRoomService(ArrayList<MenuItem> mList) {
+        RoomService rs = new RoomService(mList, dateTime, remarks, rsList.size());
+        rsList.add(rs);
+        return rs;
+        return null;
+    }
+  
     /**
      * finds and removes room service if it exists and
      * updates it to file
@@ -72,7 +61,14 @@ public class RoomServiceManager {
      * @return
      */
     public void removeRoomService(RoomService rs) {
-        // TODO implement here
+        int id = rs.getId();
+        RoomService temp;
+        rsList.remove(id);
+        for(int i=id;i<rsList.size();i++) {
+        	temp = rsList.get(i);
+        	temp.setId(id);
+        	rsList.set(i, temp);
+        }
         return;
     }
 
@@ -114,7 +110,6 @@ public class RoomServiceManager {
      * @return
      */
     public RoomService getRoomServiceById(int id) {
-        // TODO implement here
-        return null;
+        return rsList.get(id);
     }
 }
