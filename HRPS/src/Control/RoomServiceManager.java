@@ -42,13 +42,20 @@ public class RoomServiceManager {
     private Scanner sc;
 
     /**
+     * Overloaded constructor for RoomServiceManager
+     * some initialisation of few variables and
+     * read room services from file
+     * 
      * @param sc
      */
-    public void RoomServiceManager(Scanner sc) {
+    public RoomServiceManager(Scanner sc) {
         // TODO implement here
     }
 
     /**
+     * allows for placing orders for room service and
+     * is added to list of room services and updated to file
+     *  
      * @param mList 
      * @return
      */
@@ -58,6 +65,9 @@ public class RoomServiceManager {
     }
 
     /**
+     * finds and removes room service if it exists and
+     * updates it to file
+     * 
      * @param rs 
      * @return
      */
@@ -67,6 +77,8 @@ public class RoomServiceManager {
     }
 
     /**
+     * updates room service using the updateRoomServiceMenu() and
+     * writes to file
      * @param rs 
      * @return
      */
@@ -76,6 +88,7 @@ public class RoomServiceManager {
     }
 
     /**
+     * menu for updating room service details
      * @return
      */
     private void updateRoomServiceMenu() {
@@ -84,6 +97,8 @@ public class RoomServiceManager {
     }
 
     /**
+     * assures that user enters an int
+     * 
      * @param option 
      * @param input 
      * @return
@@ -94,6 +109,7 @@ public class RoomServiceManager {
     }
 
     /**
+     * return room service based on room id
      * @param id 
      * @return
      */
