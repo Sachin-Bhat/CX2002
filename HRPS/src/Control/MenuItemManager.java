@@ -177,7 +177,24 @@ public class MenuItemManager {
      * @return
      */
     public ArrayList<MenuItem> selectMenuItem() {
-        // TODO implement here
+        ArrayList<MenuItem> order;
+        MenuItem add;
+        String select = "";
+        this.listMenuItems();
+        while(1) {
+        	System.out.println("Please select an item or 'N' to terminate: ");
+        	select = sc.nextLine();
+        	if(select=="n" || select=="N") {
+        		break;
+        	}
+        	else {
+        		add = this.searchMenuItem(select);
+        		System.out.println("You have ordered: " + add.getName());
+        		System.out.println("Price: " + add.getPrice());
+        		order.add(add);
+        	}
+        }
+        
         return null;
     }
 
