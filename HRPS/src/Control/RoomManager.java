@@ -41,6 +41,12 @@ public class RoomManager {
     private Scanner sc;
 
     /**
+     * Overloaded constructor for RoomManager
+     * initialisation of a few variables (including setting the hotel layout and status/type initialisation logic)
+     * is able to recreate the 48 rooms (assumptions from pdf guide) and
+     * writes it back to file if empty or 
+     * recreate rooms and write back to file
+     * 
      * @param sc
      */
     public RoomManager(Scanner sc) {
@@ -48,6 +54,7 @@ public class RoomManager {
     }
 
     /**
+     * logic in auto setting rate by room type and bed type
      * @param rType 
      * @param bType 
      * @return
@@ -58,6 +65,7 @@ public class RoomManager {
     }
 
     /**
+     * menu for updating room type
      * @return
      */
     private void roomTypeMenu() {
@@ -66,6 +74,7 @@ public class RoomManager {
     }
 
     /**
+     * returns room type based on user's choice
      * @param sc 
      * @return
      */
@@ -75,6 +84,7 @@ public class RoomManager {
     }
 
     /**
+     * menu for updating bed type
      * @return
      */
     private void bedTypeMenu() {
@@ -83,6 +93,7 @@ public class RoomManager {
     }
 
     /**
+     * returns bed type based on user's choice
      * @param sc 
      * @return
      */
@@ -92,6 +103,7 @@ public class RoomManager {
     }
 
     /**
+     * menu for updating the availability status
      * @return
      */
     private void availabilityStatusMenu() {
@@ -100,6 +112,7 @@ public class RoomManager {
     }
 
     /**
+     * returns availability status based on user's choice
      * @param sc 
      * @return
      */
@@ -109,6 +122,7 @@ public class RoomManager {
     }
 
     /**
+     * menu for updating enable/disable wifi
      * @return
      */
     private void wifiMenu() {
@@ -117,6 +131,7 @@ public class RoomManager {
     }
 
     /**
+     * returns a boolean whether wifi is enabled based on user's choice
      * @param sc 
      * @return
      */
@@ -126,6 +141,7 @@ public class RoomManager {
     }
 
     /**
+     * menu for updating allow/prohibit smoking
      * @return
      */
     private void smokingMenu() {
@@ -134,6 +150,7 @@ public class RoomManager {
     }
 
     /**
+     * returns a boolean whether smoking is allowed based on user's choice
      * @param sc 
      * @return
      */
@@ -143,6 +160,7 @@ public class RoomManager {
     }
 
     /**
+     * menu for updating the room details
      * @return
      */
     private void updateRoomMenu() {
@@ -151,6 +169,7 @@ public class RoomManager {
     }
 
     /**
+     * lists the room details
      * @param r 
      * @return
      */
@@ -160,6 +179,10 @@ public class RoomManager {
     }
 
     /**
+     * returns a String based on the boolean
+	 * returns Yes if true
+	 * returns No if false
+	 * 
      * @param response 
      * @return
      */
@@ -169,6 +192,8 @@ public class RoomManager {
     }
 
     /**
+     * return room if room is found
+	 * return null otherwise
      * @param rLevel 
      * @param rNo 
      * @return
@@ -179,6 +204,9 @@ public class RoomManager {
     }
 
     /**
+     * create and add a room to list of rooms and
+     * update to file
+     * 
      * @return
      */
     public void addRoom() {
@@ -187,6 +215,7 @@ public class RoomManager {
     }
 
     /**
+     * checks if a string is an int
      * @param str 
      * @return
      */
@@ -196,6 +225,9 @@ public class RoomManager {
     }
 
     /**
+     * allow user to update room details after providing updateRoomMenu() and
+     * update to file
+     * 
      * @param room 
      * @return
      */
@@ -205,6 +237,7 @@ public class RoomManager {
     }
 
     /**
+     * lists rooms by the occupancy rate
      * @return
      */
     public void listRoomsByOccupancyRate() {
@@ -213,6 +246,7 @@ public class RoomManager {
     }
 
     /**
+     * list rooms by the room status
      * @return
      */
     public void listRoomsByRoomStatus() {
@@ -221,6 +255,9 @@ public class RoomManager {
     }
 
     /**
+     * return room if vacant
+     * null otherwise
+     * 
      * @param room 
      * @return
      */
@@ -230,6 +267,11 @@ public class RoomManager {
     }
 
     /**
+     * provision to change availability status of 2 rooms if
+     * guest needs to switch rooms
+     * new room gets old room status
+	 * old room status is now vacant
+	 * 
      * @param oldR 
      * @param newR 
      * @return
@@ -240,6 +282,9 @@ public class RoomManager {
     }
 
     /**
+     * return room based on room id
+	 * useful in ReservationManager to set room object
+	 * 
      * @param id 
      * @return
      */
@@ -249,6 +294,8 @@ public class RoomManager {
     }
 
     /**
+     * lists room details by room number
+     * 
      * @param rNum 
      * @return
      */
@@ -258,6 +305,9 @@ public class RoomManager {
     }
 
     /**
+     * convinient method to write to file
+     * nothing much, just a short hand of a method from FileIOHandler really
+     * 
      * @return
      */
     public void writeToFile() {
@@ -266,6 +316,8 @@ public class RoomManager {
     }
 
     /**
+     * assures that user enters an int
+     * 
      * @param option 
      * @param input 
      * @return
@@ -276,6 +328,8 @@ public class RoomManager {
     }
 
     /**
+     * assures that rate is entered and formatted properly (i.e. 2dp)
+     * 
      * @param rate 
      * @param input 
      * @return

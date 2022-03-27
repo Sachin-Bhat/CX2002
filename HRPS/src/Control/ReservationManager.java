@@ -7,11 +7,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import entity.Reservation;
-import entity.Room;
-import entity.RoomService;
-import entity.Guest;
-import entity.ReservationStatus;
+import Entity.Reservation;
+import Entity.Room;
+import Entity.RoomService;
+import Entity.Guest;
+import Entity.ReservationStatus;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -65,16 +65,22 @@ public class ReservationManager {
     private Scanner sc;
 
     /**
+     * Overloaded constructor for ReservationManager
+     * used to initialise variables and 
+     * retrieve reservations from the file
+     * 
      * @param gMgr 
      * @param rMgr 
      * @param rsMgr 
      * @param sc
      */
-    public void ReservationManager(GuestManager gMgr, RoomManager rMgr, RoomServiceManager rsMgr, Scanner sc) {
+    public ReservationManager(GuestManager gMgr, RoomManager rMgr, RoomServiceManager rsMgr, Scanner sc) {
         // TODO implement here
     }
 
     /**
+     * creates and adds a new reservation to a reservation list and
+     * writes to file
      * @return
      */
     public void newReservation() {
@@ -83,6 +89,8 @@ public class ReservationManager {
     }
 
     /**
+     * searches and returns reservation if found
+     * null otherwise
      * @return
      */
     public Reservation searchReservation() {
@@ -91,6 +99,8 @@ public class ReservationManager {
     }
 
     /**
+     * updates guest's details or room number based on reservation and
+     * writes to file
      * @return
      */
     public void updateReservation() {
@@ -99,6 +109,7 @@ public class ReservationManager {
     }
 
     /**
+     * menu for update reservation
      * @return
      */
     private void updateReservationMenu() {
@@ -107,6 +118,9 @@ public class ReservationManager {
     }
 
     /**
+     * removes a reservation from the reservation list if found and
+     * writes/updates to file
+	 * prints error message otherwise
      * @return
      */
     public void removeReservation() {
@@ -115,6 +129,8 @@ public class ReservationManager {
     }
 
     /**
+     * prints the reservation details if found
+     * error message otherwise
      * @return
      */
     public void printReservation() {
@@ -123,6 +139,7 @@ public class ReservationManager {
     }
 
     /**
+     * prints all reservation which are currently not expired
      * @return
      */
     public void printAllReservations() {
@@ -131,6 +148,8 @@ public class ReservationManager {
     }
 
     /**
+     * adds room service to reservation and 
+     * writes to file
      * @param rez 
      * @param rs 
      * @return
@@ -141,6 +160,7 @@ public class ReservationManager {
     }
 
     /**
+     * assures user enters an int
      * @param option 
      * @param input 
      * @return
@@ -151,6 +171,9 @@ public class ReservationManager {
     }
 
     /**
+     * if valid room number is entered -> 1
+     * else -> 0
+     * thus assuring user always enters right room number
      * @param room 
      * @return
      */
@@ -160,6 +183,7 @@ public class ReservationManager {
     }
 
     /**
+     * checks if input is an int
      * @param input 
      * @return
      */
@@ -169,6 +193,8 @@ public class ReservationManager {
     }
 
     /**
+     * remove a valid room service from reservation and room service manager and
+     * updates to file
      * @return
      */
     public void removeRoomService() {
@@ -177,6 +203,7 @@ public class ReservationManager {
     }
 
     /**
+     * allow user to update room service status
      * @return
      */
     public void updateRoomService() {
@@ -185,6 +212,7 @@ public class ReservationManager {
     }
 
     /**
+     * searches a reservation and print all the room services for that reservation
      * @return
      */
     public void printRoomService() {
@@ -193,15 +221,19 @@ public class ReservationManager {
     }
 
     /**
+     * assures that user enters a valid time and according to the format specified
      * @param time 
      * @param date 
      * @param input
+     * @return time
      */
     private void verifyTime(String time, DateTimeFormatter date, String input) {
         // TODO implement here
     }
 
     /**
+     * allows the guest to check in without a reservation and
+     * updates to file
      * @return
      */
     public void checkIn() {
@@ -210,6 +242,8 @@ public class ReservationManager {
     }
 
     /**
+     * guest check in using a valid reservation and
+     * updates to file
      * @param rez 
      * @return
      */
@@ -219,6 +253,7 @@ public class ReservationManager {
     }
 
     /**
+     * sets reservation status to expired 
      * @return
      */
     public void expireReservation() {
@@ -227,6 +262,8 @@ public class ReservationManager {
     }
 
     /**
+     * check out the guest from the hotel and
+     * update to file
      * @return
      */
     public Reservation checkOut() {
