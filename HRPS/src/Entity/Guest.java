@@ -1,6 +1,3 @@
-/**
- *
- */
 package Entity;
 
 import java.io.Serializable;
@@ -14,57 +11,16 @@ public class Guest implements Serializable {
 	/**
      * Default constructor
      */
-    public Guest() {
-    }
-
-    /**
-     * 
-     */
+    public Guest() {}
     private static final long serialVersionUID = 1234L;
-
-    /**
-     * 
-     */
     private int guestId;
-
-    /**
-     * 
-     */
     private String id;
-
-    /**
-     * 
-     */
     private String name;
-
-    /**
-     * 
-     */
     private CreditCard card;
-
-    /**
-     * 
-     */
     private String address;
-
-    /**
-     * 
-     */
     private String country;
-
-    /**
-     * 
-     */
     private char gender;
-
-    /**
-     * 
-     */
     private String nationality;
-
-    /**
-     * 
-     */
     private long contactNo;
 
     /**

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package Entity;
 
 import java.io.Serializable;
