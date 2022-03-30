@@ -17,42 +17,19 @@ import Entity.OrderStatus;
  *
  */
 public class Payment {
-	
-	/**
-     * Default constructor
-     */
-    public Payment() {
-    }
 
-    /**
-     * 
-     */
     private double taxRate;
-
-    /**
-     * 
-     */
     private double discountRate;
-
-    /**
-     * 
-     */
     private double weekendRate;
-
-    /**
-     * 
-     */
     private Reservation rez;
-
-    /**
-     * 
-     */
     private Scanner sc;
 
     /**
      * @param rez 
      * @param sc
      */
+    public Payment() {}
+	
     public void Payment(Reservation rez, Scanner sc) {
         // TODO implement here
     }
