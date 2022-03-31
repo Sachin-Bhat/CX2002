@@ -1,7 +1,19 @@
-import java.time.LocalDate;
+package Entity;
+
+import java.io.Serializable;
+
+import java.util.Objects;
 import java.util.ArrayList;
 
-public class Reservation {
+import java.time.LocalDate;
+
+import Entity.OrderStatus;
+
+/**
+ * @author BHAT SACHIN <SACHIN008@e.ntu.edu.sg>
+ *
+ */
+public class Reservation implements Serializable {
 
 	private int rezCode;
 	private Guest guest;
