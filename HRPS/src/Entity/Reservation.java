@@ -28,6 +28,8 @@ public class Reservation implements Serializable {
 	
 	private ArrayList<RoomService> rsList;
 	
+	private static final long serialVersionUID = 1234L;
+	
 	public Reservation(int count) { //clarify on parameter
 		
 		
