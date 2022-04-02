@@ -68,6 +68,10 @@ public class Guest implements Serializable {
     private long contactNo;
 
     /**
+     * Constructor for Guest
+     * Initialise a few variables
+     * Initialise card with constructor from CreditCard
+     *
      * @param guestId 
      * @param id 
      * @param name 
@@ -77,8 +81,16 @@ public class Guest implements Serializable {
      * @param nationality 
      * @param contactNo
      */
-    public void Guest(int guestId, String id, String name, String address, String country, char gender, String nationality, long contactNo) {
+    public Guest(int guestId, String id, String name, String address, String country, char gender, String nationality, long contactNo) {
         // TODO implement here
+	this.guestId = guestId;
+	this.id = id;
+	this.name = name;
+	this.gender = gender;
+	this.nationality = nationality;
+	this.contactNo = contactNo;
+	
+	card = new CreditCard(name, address, country, cType, cardNo, cvv, exp);
     }
 
     /**
@@ -87,6 +99,7 @@ public class Guest implements Serializable {
      */
     public void setGuestId(int guestId) {
         // TODO implement here
+	this.guestId = guestId;
         return;
     }
 
@@ -96,6 +109,7 @@ public class Guest implements Serializable {
      */
     public void setId(String id) {
         // TODO implement here
+	this.id = id;
         return;
     }
 
@@ -105,6 +119,7 @@ public class Guest implements Serializable {
      */
     public void setName(String name) {
         // TODO implement here
+	this.name = name;
         return;
     }
 
@@ -114,6 +129,7 @@ public class Guest implements Serializable {
      */
     public void setCreditCard(CreditCard card) {
         // TODO implement here
+	this.card = card;
         return;
     }
 
@@ -123,6 +139,7 @@ public class Guest implements Serializable {
      */
     public void setAddress(String address) {
         // TODO implement here
+	this.address = address;
         return;
     }
 
@@ -132,6 +149,7 @@ public class Guest implements Serializable {
      */
     public void setCountry(String country) {
         // TODO implement here
+	this.country = country;
         return;
     }
 
@@ -141,6 +159,7 @@ public class Guest implements Serializable {
      */
     public void setGender(char gender) {
         // TODO implement here
+	this.gender = gender;
         return;
     }
 
@@ -150,6 +169,7 @@ public class Guest implements Serializable {
      */
     public void setNationality(String nationality) {
         // TODO implement here
+	this.nationality = nationality;
         return;
     }
 
@@ -159,7 +179,8 @@ public class Guest implements Serializable {
      */
     public void setContactNo(long contactNo) {
         // TODO implement here
-        return;
+        this.contactNo = contactNo;
+	return;
     }
 
     /**
@@ -167,7 +188,7 @@ public class Guest implements Serializable {
      */
     public int getGuestId() {
         // TODO implement here
-        return 0;
+        return guestId;
     }
 
     /**
@@ -175,7 +196,7 @@ public class Guest implements Serializable {
      */
     public String getId() {
         // TODO implement here
-        return "";
+        return id;
     }
 
     /**
@@ -183,7 +204,7 @@ public class Guest implements Serializable {
      */
     public String getName() {
         // TODO implement here
-        return "";
+        return name;
     }
 
     /**
@@ -191,7 +212,7 @@ public class Guest implements Serializable {
      */
     public CreditCard getCreditCard() {
         // TODO implement here
-        return null;
+        return card;
     }
 
     /**
@@ -199,7 +220,7 @@ public class Guest implements Serializable {
      */
     public String getAddress() {
         // TODO implement here
-        return "";
+        return address;
     }
 
     /**
@@ -207,7 +228,7 @@ public class Guest implements Serializable {
      */
     public String getCountry() {
         // TODO implement here
-        return "";
+        return country;
     }
 
     /**
@@ -215,7 +236,7 @@ public class Guest implements Serializable {
      */
     public char getGender() {
         // TODO implement here
-        return '0';
+        return gender;
     }
 
     /**
@@ -223,7 +244,7 @@ public class Guest implements Serializable {
      */
     public String getNationality() {
         // TODO implement here
-        return "";
+        return nationality;
     }
 
     /**
@@ -231,6 +252,6 @@ public class Guest implements Serializable {
      */
     public long getContactNo() {
         // TODO implement here
-        return 0;
+        return contactNo;
     }
 }
