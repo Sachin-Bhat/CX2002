@@ -1,6 +1,3 @@
-/**
- * 
- */
 package Entity;
 
 import java.io.Serializable;
@@ -14,64 +11,19 @@ public class Guest implements Serializable {
 	/**
      * Default constructor
      */
-    public Guest() {
-    }
-
-    /**
-     * 
-     */
+    public Guest() {}
     private static final long serialVersionUID = 1234L;
-
-    /**
-     * 
-     */
     private int guestId;
-
-    /**
-     * 
-     */
     private String id;
-
-    /**
-     * 
-     */
     private String name;
-
-    /**
-     * 
-     */
     private CreditCard card;
-
-    /**
-     * 
-     */
-    private String addresss;
-
-    /**
-     * 
-     */
+    private String address;
     private String country;
-
-    /**
-     * 
-     */
     private char gender;
-
-    /**
-     * 
-     */
     private String nationality;
-
-    /**
-     * 
-     */
     private long contactNo;
 
     /**
-     * Constructor for Guest
-     * Initialise a few variables
-     * Initialise card with constructor from CreditCard
-     *
      * @param guestId 
      * @param id 
      * @param name 
@@ -81,177 +33,98 @@ public class Guest implements Serializable {
      * @param nationality 
      * @param contactNo
      */
-    public Guest(int guestId, String id, String name, String address, String country, char gender, String nationality, long contactNo) {
-        // TODO implement here
-	this.guestId = guestId;
-	this.id = id;
-	this.name = name;
-	this.gender = gender;
-	this.nationality = nationality;
-	this.contactNo = contactNo;
-	
-	card = new CreditCard(name, address, country, cType, cardNo, cvv, exp);
+    public void Guest(int guestId, String id, String name, String address, String country, char gender, String nationality, long contactNo) {
+        this.guestId = guestId;
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.country = country;
+        this.gender = gender;
+        this.nationality = nationality;
+        this.contactNo = contactNo;
     }
-
+    //SETTER METHODS
     /**
      * @param guestId 
      * @return
      */
-    public void setGuestId(int guestId) {
-        // TODO implement here
-	this.guestId = guestId;
-        return;
-    }
-
+    public void setGuestId(int guestId) {this.guestId = guestId;}
     /**
      * @param id 
      * @return
      */
-    public void setId(String id) {
-        // TODO implement here
-	this.id = id;
-        return;
-    }
-
+    public void setId(String id) {this.id = id;}
     /**
      * @param name 
      * @return
      */
-    public void setName(String name) {
-        // TODO implement here
-	this.name = name;
-        return;
-    }
-
+    public void setName(String name) {this.name = name;}
     /**
      * @param card 
      * @return
      */
-    public void setCreditCard(CreditCard card) {
-        // TODO implement here
-	this.card = card;
-        return;
-    }
-
+    public void setCreditCard(CreditCard card) {this.card = card;}
     /**
      * @param address 
      * @return
      */
-    public void setAddress(String address) {
-        // TODO implement here
-	this.address = address;
-        return;
-    }
-
+    public void setAddress(String address) {this.address = address;}
     /**
      * @param country 
      * @return
      */
-    public void setCountry(String country) {
-        // TODO implement here
-	this.country = country;
-        return;
-    }
-
+    public void setCountry(String country) {this.country = country;}
     /**
      * @param gender 
      * @return
      */
-    public void setGender(char gender) {
-        // TODO implement here
-	this.gender = gender;
-        return;
-    }
-
+    public void setGender(char gender) {this.gender = gender;}
     /**
      * @param nationality 
      * @return
      */
-    public void setNationality(String nationality) {
-        // TODO implement here
-	this.nationality = nationality;
-        return;
-    }
-
+    public void setNationality(String nationality) {this.nationality = nationality;}
     /**
      * @param contactNo 
      * @return
      */
-    public void setContactNo(long contactNo) {
-        // TODO implement here
-        this.contactNo = contactNo;
-	return;
-    }
+    public void setContactNo(long contactNo) {this.contactNo = contactNo;}
 
+    //GETTER METHODS
     /**
      * @return
      */
-    public int getGuestId() {
-        // TODO implement here
-        return guestId;
-    }
-
+    public int getGuestId() {return guestId;}
     /**
      * @return
      */
-    public String getId() {
-        // TODO implement here
-        return id;
-    }
-
+    public String getId() {return id;}
     /**
      * @return
      */
-    public String getName() {
-        // TODO implement here
-        return name;
-    }
-
+    public String getName() {return name;}
     /**
      * @return
      */
-    public CreditCard getCreditCard() {
-        // TODO implement here
-        return card;
-    }
-
+    public CreditCard getCreditCard() {return card;}
     /**
      * @return
      */
-    public String getAddress() {
-        // TODO implement here
-        return address;
-    }
-
+    public String getAddress() {return address;}
     /**
      * @return
      */
-    public String getCountry() {
-        // TODO implement here
-        return country;
-    }
-
+    public String getCountry() {return country;}
     /**
      * @return
      */
-    public char getGender() {
-        // TODO implement here
-        return gender;
-    }
-
+    public char getGender() {return gender;}
     /**
      * @return
      */
-    public String getNationality() {
-        // TODO implement here
-        return nationality;
-    }
-
+    public String getNationality() {return nationality;}
     /**
      * @return
      */
-    public long getContactNo() {
-        // TODO implement here
-        return contactNo;
-    }
+    public long getContactNo() {return contactNo;}
 }
