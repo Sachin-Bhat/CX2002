@@ -1,6 +1,3 @@
-/**
- * 
- */
 package Control;
 
 import java.util.Scanner;
@@ -17,29 +14,11 @@ public class RoomManager {
 	/**
      * Default constructor
      */
-    public RoomManager() {
-    }
-
-    /**
-     * 
-     */
+    public RoomManager() {}
     private ArrayList<Room> roomList;
-
-    /**
-     * 
-     */
     private FileIOHandler fileIO = new FileIOHandler();
-
-    /**
-     * 
-     */
     private int count = 1;
-
-    /**
-     * 
-     */
     private Scanner sc;
-
     /**
      * @param sc
      */
@@ -90,7 +69,6 @@ public class RoomManager {
         // TODO implement here
         return null;
     }
-
     /**
      * @return
      */
