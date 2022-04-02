@@ -1,6 +1,3 @@
-/**
- * 
- */
 package Entity;
 
 import java.io.Serializable;
@@ -13,62 +10,19 @@ public class Room implements Serializable {
 	/**
      * Default constructor
      */
-    public Room() {
-    }
+    public Room() {}
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 1234L;
 
-    /**
-     * 
-     */
     private int id;
-
-    /**
-     * 
-     */
     private int rLevel;
-
-    /**
-     * 
-     */
     private int rNo;
-
-    /**
-     * 
-     */
     private RoomType rType;
-
-    /**
-     * 
-     */
     private float rate;
-
-    /**
-     * 
-     */
     private BedType bType;
-
-    /**
-     * 
-     */
     private AvailabilityStatus availStatus;
-
-    /**
-     * 
-     */
     private boolean hasWifi;
-
-    /**
-     * 
-     */
     private boolean isSmoking;
-
-    /**
-     * 
-     */
     private String view;
 
     /**
@@ -83,178 +37,112 @@ public class Room implements Serializable {
      * @param rLevel 
      * @param rNo
      */
+
+    //CONSTRUCTOR
     public Room(int id, RoomType rType, float rate, BedType bType, AvailabilityStatus availStatus, boolean hasWifi, boolean isSmoking, String view, int rLevel, int rNo) {
-        // TODO implement here
+        this.id = id;
+        this.rType = rType;
+        this.rate rate;
+        this.bType bType;
+        this.availStatus = availStatus;
+        this.hasWifi = hasWifi;
+        this.isSmoking = isSmoking;
+        this.view = view;
+        this.rLevel = rLevel;
+        this.rNo = rNo;
     }
 
+    //SETTER METHODS
     /**
      * @param id 
      * @return
      */
-    public void setId(int id) {
-        // TODO implement here
-        return;
-    }
-
+    public void setId(int id) {this.id = id;}
     /**
      * @param rLevel 
      * @return
      */
-    public void setRLevel(int rLevel) {
-        // TODO implement here
-        return;
-    }
-
+    public void setRLevel(int rLevel) {this.rLevel = rLevel;}
     /**
      * @param rNo 
      * @return
      */
-    public void setRNo(int rNo) {
-        // TODO implement here
-        return;
-    }
-
+    public void setRNo(int rNo) {this.rNo = rNo;}
     /**
      * @param rType 
      * @return
      */
-    public void setRType(RoomType rType) {
-        // TODO implement here
-        return;
-    }
-
+    public void setRType(RoomType rType) {this.rType = rType;}
     /**
      * @param rate 
      * @return
      */
-    public void setRate(float rate) {
-        // TODO implement here
-        return;
-    }
-
+    public void setRate(float rate) {this.rate = rate;}
     /**
      * @param bType 
      * @return
      */
-    public void setBType(BedType bType) {
-        // TODO implement here
-        return;
-    }
-
+    public void setBType(BedType bType) {this.bType = bType;}
     /**
      * @param availStatus 
      * @return
      */
-    public void setAvailStatus(AvailabilityStatus availStatus) {
-        // TODO implement here
-        return;
-    }
-
+    public void setAvailStatus(AvailabilityStatus availStatus) {this.availStatus = availStatus;}
     /**
      * @param hasWifi 
      * @return
      */
-    public void setWifi(boolean hasWifi) {
-        // TODO implement here
-        return;
-    }
-
+    public void setWifi(boolean hasWifi) {this.hasWifi = hasWifi;}
     /**
      * @param isSmoking 
      * @return
      */
-    public void setSmoking(boolean isSmoking) {
-        // TODO implement here
-        return;
-    }
-
+    public void setSmoking(boolean isSmoking) {this.isSmoking = isSmoking;}
     /**
      * @param view 
      * @return
      */
-    public void setView(String view) {
-        // TODO implement here
-        return;
-    }
+    public void setView(String view) {this.view = view;}
 
+    //GETTER METHODS
     /**
      * @return
      */
-    public int getId() {
-        // TODO implement here
-        return 0;
-    }
-
+    public int getId() {return this.id;}
     /**
      * @return
      */
-    public int getRLevel() {
-        // TODO implement here
-        return 0;
-    }
-
+    public int getRLevel() {return this.rLevel;}
     /**
      * @return
      */
-    public int getRNo() {
-        // TODO implement here
-        return 0;
-    }
-
+    public int getRNo() {return this.rNo;}
     /**
      * @return
      */
-    public RoomType getRType() {
-        // TODO implement here
-        return null;
-    }
-
+    public RoomType getRType() {return this.rType;}
     /**
      * @return
      */
-    public float getRate() {
-        // TODO implement here
-        return 0.0f;
-    }
-
+    public float getRate() {return this.rate;}
     /**
      * @return
      */
-    public BedType getBType() {
-        // TODO implement here
-        return null;
-    }
-
+    public BedType getBType() {return this.bType;}
     /**
      * @return
      */
-    public AvailabilityStatus getAvailStatus() {
-        // TODO implement here
-        return null;
-    }
-
+    public AvailabilityStatus getAvailStatus() {return availStatus;}
     /**
      * @return
      */
-    public boolean getWifi() {
-        // TODO implement here
-        return false;
-    }
-
+    public boolean getWifi() {return this.hasWifi;}
     /**
      * @return
      */
-    public boolean getSmoking() {
-        // TODO implement here
-        return false;
-    }
-
+    public boolean getSmoking() {return this.isSmoking;}
     /**
      * @return
      */
-    public String getView() {
-        // TODO implement here
-        return "";
-    }
-
+    public String getView() {return this.view;}
 }
