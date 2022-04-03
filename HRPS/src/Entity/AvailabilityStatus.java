@@ -11,5 +11,5 @@ public enum AvailabilityStatus {
 	VACANT,
     OCCUPIED,
     RESERVED,
-    UNDER_MAINTAINENCE
+    UNDER_MAINTENANCE
 }
