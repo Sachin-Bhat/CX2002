@@ -16,8 +16,9 @@ public class RoomManager {
     public RoomManager() {}
     private ArrayList<Room> roomList;
     private FileIOHandler fileIO = new FileIOHandler();
-    private final int MAX = 48;
+    private final int MAX_ROOMS = 48;
     private Scanner sc;
+
     /**
      * Overloaded constructor for RoomManager
      * initialisation of a few variables (including setting the hotel layout and status/type initialisation logic)
@@ -29,7 +30,10 @@ public class RoomManager {
      */
     public RoomManager(Scanner sc) {
         // TODO implement here
-        //AAAAAAAAAAAAAAAAAAAAAAA
+        private final int FLOORS = 6;
+        private final int ROOMS_PER_FLOOR = 8;
+
+
     }
 
     /**
@@ -40,6 +44,7 @@ public class RoomManager {
      */
     private float assignRate(RoomType rType, BedType bType) {
         // TODO implement here
+        //do i assign each type to a rate and add??
         return 0.0f;
     }
 
@@ -83,7 +88,7 @@ public class RoomManager {
                     System.out.println("No such option");
                     break;
             }
-        } while (option!=1 && option!=2 && option!=3 && option!=4 && option!=5);
+        } while (option!=1 && option!=2 && option!=3 && option!=4);
         return rType;
     }
 
@@ -147,7 +152,6 @@ public class RoomManager {
     private AvailabilityStatus chooseAvailabilityStatus(Scanner sc) {
         int option;
         AvailabilityStatus aStat = null;
-
         do {
             availabilityStatusMenu();
             option = verifyOption(option, "Enter an option: ");
@@ -181,7 +185,6 @@ public class RoomManager {
         System.out.println("Updating WiFi options: ");
         System.out.println("1. Enable room WiFi");
         System.out.println("2. Disable room WiFi");
-        System.out.print("Enter an option: ");
     }
     /**
      * returns a boolean whether wifi is enabled based on user's choice
@@ -191,7 +194,6 @@ public class RoomManager {
     private boolean chooseWifi(Scanner sc) {
         int option;
         boolean hasWifi = false;
-
         do {
             wifiMenu();
             option = verifyOption(option, "Enter an option: ");
@@ -219,7 +221,6 @@ public class RoomManager {
         System.out.println("Updating Smoking options: ");
         System.out.println("1. Allow smoking in room");
         System.out.println("2. Prohibit smoking in room");
-        System.out.print("Enter an option: ");
     }
     /**
      * returns a boolean whether smoking is allowed based on user's choice
@@ -229,7 +230,6 @@ public class RoomManager {
     private boolean chooseSmoking(Scanner sc) {
         int option;
         boolean isSmoking = false;
-
         do {
             smokingMenu();
             option = verifyOption(option, "Enter an option: ");
@@ -273,13 +273,32 @@ public class RoomManager {
     }
 
     /**
+     * allow user to update room details after providing updateRoomMenu() and
+     * update to file
+     *
+     * @param room
+     * @return
+     */
+    public void updateRoom(String room) {
+        // TODO implement here
+        return;
+    }
+
+    /**
      * lists the room details
      * @param r
      * @return
      */
     private void listRoomDetails(Room r) {
-        // TODO implement here
-        return;
+        System.out.println("\t Room ID: " + r.getId());
+        System.out.println("\t Room type: "+r.getType());
+        System.out.println("\t Room rate: "+r.getRate());
+        System.out.println("\t Room bed type: "+r.getBType());
+        System.out.println("\t Room availability: "+r.getAvailStatus());
+        System.out.println("\t Room WiFi option: "+r.getWifi());
+        System.out.println("\t Room Smoking option: "+r.getSmoking());
+        System.out.println("\t Room view: "+r.getView());
+        System.out.printf("\t Room level: %02d%n-%02d%n", r.getRLevel(), r.getRNo());
     }
 
     /**
@@ -291,9 +310,7 @@ public class RoomManager {
      * @return
      */
     private String booleanToString(boolean response) {
-        if(response){
-            return "Yes";
-        }else return "No";
+        if(response){return "Yes";}else return "No";
     }
 
     /**
@@ -316,10 +333,6 @@ public class RoomManager {
      */
     public void addRoom() {
         // TODO implement here
-        //oh no
-
-
-
         return;
     }
 
@@ -338,18 +351,6 @@ public class RoomManager {
             isInt = false;
         }
         return isInt;
-    }
-
-    /**
-     * allow user to update room details after providing updateRoomMenu() and
-     * update to file
-     *
-     * @param room
-     * @return
-     */
-    public void updateRoom(String room) {
-        // TODO implement here
-        return;
     }
 
     /**
@@ -408,7 +409,7 @@ public class RoomManager {
     public Room getRoomById(int id) {
         Room room = null;
         for(Room temp : roomList) {
-            if (room.getId() == id) {
+            if (temp.getId() == id) {
                 room = temp;
                 break;
             }
@@ -428,7 +429,7 @@ public class RoomManager {
     }
 
     /**
-     * convinient method to write to file
+     * convenient method to write to file
      * nothing much, just a short hand of a method from FileIOHandler really
      *
      * @return
@@ -447,14 +448,12 @@ public class RoomManager {
      */
     private int verifyOption(int option, String input) {
         boolean invalid = true;
-
         while (invalid) {
             if (!sc.hasNextInt()) {
                 System.out.println("Invalid input type. Please enter an integer!");
                 sc.nextLine();	// clear the input in the buffer (if any)
                 System.out.print(input);
-            }
-            else {
+            } else {
                 invalid = false;
                 option = sc.nextInt();
                 sc.nextLine();	// clear the "\n" in the buffer (if any)
@@ -471,7 +470,18 @@ public class RoomManager {
      * @return
      */
     private float verifyRate(float rate, String input) {
-        // TODO implement here
-        return 0.0f;
+        boolean invalid = true;
+        while (invalid) {
+            if (!sc.hasNextFloat()) {
+                System.out.println("Invalid input type. Please enter a float type!");
+                sc.nextLine();	// clear the input in the buffer (if any)
+                System.out.print(input);
+            } else {
+                invalid = false;
+                option = sc.nextFloat();
+                sc.nextLine();	// clear the "\n" in the buffer (if any)
+            }
+        }
+        return option;
     }
 }
