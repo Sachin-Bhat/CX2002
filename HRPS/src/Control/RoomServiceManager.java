@@ -11,62 +11,70 @@ import Entity.RoomService;
 import Entity.MenuItem;
 
 /**
- * @author BHAT SACHIN <SACHIN008@e.ntu.edu.sg>
  *
  */
 public class RoomServiceManager {
-	/**
-     * Default constructor
-     */
-    public RoomServiceManager() {
-    }
-
-    /**
-     * 
-     */
+	
     private ArrayList<RoomService> rsList;
-
-    /**
-     * 
-     */
     private FileIOHandler fileIO;
-
-    /**
-     * 
-     */
     private int count = 1;
-
-    /**
-     * 
-     */
     private Scanner sc;
 
     /**
+     * Overloaded constructor for RoomServiceManager
+     * some initialisation of few variables and
+     * read room services from file
+     * 
      * @param sc
      */
+    public RoomServiceManager(Scanner sc) {
+        // TODO implement here
+    }
+
+    /**
+     * allows for placing orders for room service and
+     * is added to list of room services and updated to file
+     *  
+     * @param mList 
+     * @return
+     */
+    
+    public RoomServiceManager() {
+    	
+    }
     public void RoomServiceManager(Scanner sc) {
         // TODO implement here
     }
 
-    /**
-     * @param mList 
-     * @return
-     */
     public RoomService orderRoomService(ArrayList<MenuItem> mList) {
-        // TODO implement here
+        RoomService rs = new RoomService(mList, dateTime, remarks, rsList.size());
+        rsList.add(rs);
+        return rs;
         return null;
     }
-
+  
     /**
+     * finds and removes room service if it exists and
+     * updates it to file
+     * 
      * @param rs 
      * @return
      */
     public void removeRoomService(RoomService rs) {
-        // TODO implement here
+        int id = rs.getId();
+        RoomService temp;
+        rsList.remove(id);
+        for(int i=id;i<rsList.size();i++) {
+        	temp = rsList.get(i);
+        	temp.setId(id);
+        	rsList.set(i, temp);
+        }
         return;
     }
 
     /**
+     * updates room service using the updateRoomServiceMenu() and
+     * writes to file
      * @param rs 
      * @return
      */
@@ -76,6 +84,7 @@ public class RoomServiceManager {
     }
 
     /**
+     * menu for updating room service details
      * @return
      */
     private void updateRoomServiceMenu() {
@@ -84,6 +93,8 @@ public class RoomServiceManager {
     }
 
     /**
+     * assures that user enters an int
+     * 
      * @param option 
      * @param input 
      * @return
@@ -94,11 +105,11 @@ public class RoomServiceManager {
     }
 
     /**
+     * return room service based on room id
      * @param id 
      * @return
      */
     public RoomService getRoomServiceById(int id) {
-        // TODO implement here
-        return null;
+        return rsList.get(id);
     }
 }

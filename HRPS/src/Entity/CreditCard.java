@@ -57,6 +57,9 @@ public class CreditCard implements Serializable {
     public String exp;
 
     /**
+     * Constructor for CreditCard
+     * Initialising a few variables.
+     *
      * @param name 
      * @param country 
      * @param address 
@@ -65,8 +68,15 @@ public class CreditCard implements Serializable {
      * @param cvv 
      * @param exp
      */
-    public void CreditCard(String name, String country, String address, CardType cType, long cardNo, int cvv, String exp) {
+    public CreditCard(String name, String country, String address, CardType cType, long cardNo, int cvv, String exp) {
         // TODO implement here
+	this.name = name;
+	this.country = country;
+	this.address = address;
+	this.cType = cType;
+	this.cardNo = cardNo;
+	this.cvv = cvv;
+	this.exp = exp;
     }
 
     /**
@@ -75,6 +85,7 @@ public class CreditCard implements Serializable {
      */
     public void setCardNo(long cardNo) {
         // TODO implement here
+	this.cardNo = cardNo;
         return;
     }
 
@@ -84,6 +95,7 @@ public class CreditCard implements Serializable {
      */
     public void setCVV(int cvv) {
         // TODO implement here
+	this.cvv = cvv;
         return;
     }
 
@@ -93,6 +105,7 @@ public class CreditCard implements Serializable {
      */
     public void setCardType(CardType cType) {
         // TODO implement here
+	this.cType = cType;
         return;
     }
 
@@ -102,7 +115,8 @@ public class CreditCard implements Serializable {
      */
     public void setName(String name) {
         // TODO implement here
-        return;
+        this.name = name;
+	return;
     }
 
     /**
@@ -111,7 +125,8 @@ public class CreditCard implements Serializable {
      */
     public void setAddress(String address) {
         // TODO implement here
-        return;
+        this.address = address;
+	return;
     }
 
     /**
@@ -120,7 +135,8 @@ public class CreditCard implements Serializable {
      */
     public void setCountry(String country) {
         // TODO implement here
-        return;
+        this.country = country;
+	return;
     }
 
     /**
@@ -129,7 +145,8 @@ public class CreditCard implements Serializable {
      */
     public void setExpiry(String exp) {
         // TODO implement here
-        return;
+        this.exp = exp;
+	return;
     }
 
     /**
@@ -137,7 +154,7 @@ public class CreditCard implements Serializable {
      */
     public long getCardNo() {
         // TODO implement here
-        return 0;
+        return cardNo;
     }
 
     /**
@@ -145,7 +162,7 @@ public class CreditCard implements Serializable {
      */
     public int getCVV() {
         // TODO implement here
-        return 0;
+        return cvv;
     }
 
     /**
@@ -153,7 +170,7 @@ public class CreditCard implements Serializable {
      */
     public CardType getCardType() {
         // TODO implement here
-        return null;
+        return cType;
     }
 
     /**
@@ -161,7 +178,7 @@ public class CreditCard implements Serializable {
      */
     public String getName() {
         // TODO implement here
-        return "";
+        return name;
     }
 
     /**
@@ -169,7 +186,7 @@ public class CreditCard implements Serializable {
      */
     public String getAddress() {
         // TODO implement here
-        return "";
+        return address;
     }
 
     /**
@@ -177,7 +194,7 @@ public class CreditCard implements Serializable {
      */
     public String getCountry() {
         // TODO implement here
-        return "";
+        return country;
     }
 
     /**
@@ -185,6 +202,6 @@ public class CreditCard implements Serializable {
      */
     public String getExpiry() {
         // TODO implement here
-        return "";
+        return exp;
     }
 }

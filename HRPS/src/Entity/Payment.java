@@ -50,11 +50,18 @@ public class Payment {
     private Scanner sc;
 
     /**
+     * Constructor for Payment
+     * Initialising the taxRate, discountRate, weekendRate, Reservation, and Scanner class
      * @param rez 
      * @param sc
      */
-    public void Payment(Reservation rez, Scanner sc) {
+    public Payment(Reservation rez, Scanner sc) {
         // TODO implement here
+        this.taxRate = 0.08;
+        this.weekendRate = 1.25;
+        this.discountRate = 0.2;
+        this.rez = rez;
+        this.sc = sc;
     }
 
     /**
@@ -62,6 +69,18 @@ public class Payment {
      */
     public void invoiceSummary() {
         // TODO implement here
+        System.out.println("\nHotel Checkout Invoice Summary");
+        System.out.println("Total Room Charge(Weekdays: "+ calcWeekdays() +", Weekends: "+ calcWeekends() +"): " + "$SGD" + calcRoomCharge());
+        if (rs.getRoomServiceList().size() != 0) {
+            System.out.println("Room Service Charges:");
+            getRoomServicePriceList();
+            System.out.printf("Total Room Service Charge: + $SGD%.2f\n",rs.getRoomServicePrice());
+        }
+
+        if(calculateDiscount() != 0)
+            System.out.printf("Discount: - $SGD%.2f\n",calcDiscount());
+        System.out.printf("Tax : + $SGD%.2f\n",calcTax());
+        System.out.printf("Total bill is: $SGD%.2f",calcGrandTotal());
         return;
     }
 
@@ -71,6 +90,7 @@ public class Payment {
      */
     public void invoiceSummary(Bill bill) {
         // TODO implement here
+        bill.printReceipt();
         return;
     }
 
@@ -79,6 +99,13 @@ public class Payment {
      */
     private void getRoomServicePriceList() {
         // TODO implement here
+        ArrayList<RoomService> rsList = rez.getRoomServiceList();
+        for (RoomService rs : rsList) {
+            System.out.println("Room Service <"+ rsList.indexOf(rs)+1 +">");
+            //during payment change all room service status to delivered.
+            rs.setOrderStatus(OrderStatus.DELIVERED);
+            rs.printOrderReceipt();
+        }
         return;
     }
 
@@ -87,6 +114,12 @@ public class Payment {
      */
     private void paymentMenu() {
         // TODO implement here
+        System.out.println("\n~--------------------------------~");
+        System.out.println("! Payment by:                    !");
+        System.out.println("! 1. Cash                        !");
+        System.out.println("! 2. Credit Card                 !");
+        System.out.println("~--------------------------------~");
+        System.out.print("Enter an option: ");
         return;
     }
 
@@ -95,6 +128,34 @@ public class Payment {
      */
     public void paymentByCashOrCredit() {
         // TODO implement here
+        int updateChoice = -1;
+        do {
+            payMenu();
+            uChoice = validateChoice(uChoice, "Enter choice: ");
+
+            switch (uChoice) {
+            case 1:
+                System.out.println("Payment Details:");
+                System.out.println("Paid by: Cash");
+                System.out.printf("Total Cost: SGD$%.2f\n",calcGrandTotal());
+                System.out.printf("Amount Paid: SGD$%.2f\n",calcGrandTotal());
+                System.out.println("Payment successful");
+                break;
+            case 2:
+                System.out.println("Payment Details:");
+                System.out.println("Paid by: Credit Card");
+                System.out.println("Type: " + rez.getGuest().getCreditCard().getcType());
+                System.out.println("Name: " + rez.getGuest().getCreditCard().getName());
+                System.out.println("Address: " + rez.getGuest().getCreditCard().getAddress());
+                System.out.printf("Amount Billed: $%.2f\n",calcGrandTotal());
+                System.out.println("Payment successful");
+                break;
+            default:
+                System.out.println("Invalid choice");
+                break;
+            }
+
+        } while (updateChoice != 1 && updateChoice != 2);
         return;
     }
 
@@ -103,7 +164,15 @@ public class Payment {
      */
     public int calcWeekends() {
         // TODO implement here
-        return 0;
+        int noWeekend = 0;
+        Period stayed = Period.between(rez.getCheckInDate(), rez.getCheckOutDate()); //Get the period between check in date and check out date.
+        int totalDays = stayed.getDays(); //Calculate the total days between check in date and check out date.
+        for(int d=0; d<totalDays; d++){
+            DayOfWeek day = DayOfWeek.of((rez.getCheckInDate().plusDays(d).get(ChronoField.DAY_OF_WEEK))); //Get the name of each day.
+            if(day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY)
+                noWeekend++;
+        }
+        return noWeekend;
     }
 
     /**
@@ -111,7 +180,15 @@ public class Payment {
      */
     public int calcWeekdays() {
         // TODO implement here
-        return 0;
+        int noWeekday = 0;
+        Period stayed = Period.between(rez.getCheckInDate(), rez.getCheckOutDate()); //Get the period between check in date and check out date.
+        int totalDays = stayed.getDays(); //Calculate the total days between check in date and check out date.
+        for(int d=0; d<totalDays; d++){
+            DayOfWeek day = DayOfWeek.of((rez.getCheckInDate().plusDays(d).get(ChronoField.DAY_OF_WEEK))); //Get the name of each day.
+            if(day != DayOfWeek.SATURDAY && day != DayOfWeek.SUNDAY)
+                noWeekday++;
+        }
+        return noWeekday;
     }
 
     /**
@@ -119,7 +196,21 @@ public class Payment {
      */
     public float calcRoomCost() {
         // TODO implement here
-        return 0.0f;
+        float totalPrice = 0;
+        Period stayed = Period.between(rez.getCheckInDate(), rez.getCheckOutDate()); //Get the period between check in date and check out date.
+        int totalDays = stayed.getDays(); //Calculate the total days between check in date and check out date.
+        for(int d=0; d<totalDays; d++){
+            DayOfWeek day = DayOfWeek.of((rez.getCheckInDate().plusDays(d).get(ChronoField.DAY_OF_WEEK))); //Get the name of each day.
+            if(day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY){
+                totalPrice += rez.getRoom().getRate() * weekendRate;
+
+            }
+            else{
+
+                totalPrice += rez.getRoom().getRate();
+            }
+        }
+        return totalPrice;
     }
 
     /**
@@ -127,7 +218,8 @@ public class Payment {
      */
     public double calcDiscount() {
         // TODO implement here
-        return 0.0d;
+        return (rez.getRoomServicePrice() + calcRoomCharge()) * discountRate;
+
     }
 
     /**
@@ -135,7 +227,8 @@ public class Payment {
      */
     public double calcTax() {
         // TODO implement here
-        return 0.0d;
+        return (rez.getRoomServicePrice() + calcRoomCost() - calcDiscount()) * taxRate;
+
     }
 
     /**
@@ -143,7 +236,8 @@ public class Payment {
      */
     public double calcGrandTotal() {
         // TODO implement here
-        return 0.0d;
+        return (rez.getRoomServicePrice() + calculateRoomCost() - calcDiscount()) + calcTax();
+
     }
 
     /**
@@ -152,6 +246,7 @@ public class Payment {
      */
     public void setTaxRate(double taxRate) {
         // TODO implement here
+        this.taxRate = taxRate;
         return;
     }
 
@@ -161,6 +256,7 @@ public class Payment {
      */
     public void setDiscountRate(double discountRate) {
         // TODO implement here
+        THIS.discountRate = discountRate;
         return;
     }
 
@@ -170,6 +266,7 @@ public class Payment {
      */
     public void setWeekendRate(double weekendRate) {
         // TODO implement here
+        this.weekendRate = weekendRate;
         return;
     }
 
@@ -178,7 +275,7 @@ public class Payment {
      */
     public double getTaxRate() {
         // TODO implement here
-        return 0.0d;
+        return taxRate;
     }
 
     /**
@@ -186,7 +283,7 @@ public class Payment {
      */
     public double getDiscountRate() {
         // TODO implement here
-        return 0.0d;
+        return discountRate;
     }
 
     /**
@@ -194,7 +291,7 @@ public class Payment {
      */
     public double getWeekendRate() {
         // TODO implement here
-        return 0.0d;
+        return weekendRate;
     }
 
     /**
@@ -204,6 +301,21 @@ public class Payment {
      */
     private int verifyOption(int option, String input) {
         // TODO implement here
-        return 0;
+        boolean invalid = true;
+
+		while (invalid) {
+			if (!sc.hasNextInt()) {
+				System.out.println("Invalid input type. Please enter an integer!");
+				sc.nextLine();	// clear the input in the buffer (if any)
+				System.out.print(input);
+			}
+			else {
+				invalid = false;
+				option = sc.nextInt();
+				sc.nextLine();	// clear the "\n" in the buffer (if any)
+			}
+		}
+        return option;
+
     }
 }

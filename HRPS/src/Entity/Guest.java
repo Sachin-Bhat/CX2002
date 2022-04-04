@@ -33,7 +33,7 @@ public class Guest implements Serializable {
      * @param nationality 
      * @param contactNo
      */
-    public void Guest(int guestId, String id, String name, String address, String country, char gender, String nationality, long contactNo) {
+    public Guest(int guestId, String id, String name, String address, String country, char gender, String nationality, long contactNo) {
         this.guestId = guestId;
         this.id = id;
         this.name = name;
