@@ -50,11 +50,18 @@ public class Payment {
     private Scanner sc;
 
     /**
+     * Constructor for Payment
+     * Initialising the taxRate, discountRate, weekendRate, Reservation, and Scanner class
      * @param rez 
      * @param sc
      */
-    public void Payment(Reservation rez, Scanner sc) {
+    public Payment(Reservation rez, Scanner sc) {
         // TODO implement here
+	this.taxRate = 0.08;
+	this.weekendRate = 1.25;
+	this.discountRate = 0.2;
+	this.rez = rez;
+	this.sc = sc;
     }
 
     /**
@@ -62,6 +69,18 @@ public class Payment {
      */
     public void invoiceSummary() {
         // TODO implement here
+	System.out.println("\nHotel Checkout Invoice Summary");
+	System.out.println("Total Room Charge(Weekdays: "+ calculateWeekdays() +", Weekends: "+ calculateWeekends() +"): " + "$SGD" + calculateRoomCharge());
+	if (rs.getRoomServiceList().size() != 0) {
+		System.out.println("Room Service Charges:");
+		getRoomServicePriceList();
+		System.out.printf("Total Room Service Charge: + $SGD%.2f\n",rs.getRoomServicePrice());
+	}
+
+	if(calculateDiscount() != 0)
+		System.out.printf("Discount: - $SGD%.2f\n",calculateDiscount());
+	System.out.printf("Tax Charge: + $SGD%.2f\n",calculateTaxCharge());
+	System.out.printf("Total bill is: $SGD%.2f",calculateTotalBill());
         return;
     }
 
