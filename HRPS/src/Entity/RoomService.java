@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 
+import Control.MenuItemManager;
+
 import java.time.LocalDate;
 
 import Entity.OrderStatus;
@@ -39,57 +41,84 @@ public class RoomService implements Serializable {
 		this.dateTime = dateTime;
 		this.remarks = remarks;
 		this.id = id;
-		this.orderStatus = orderStatus.CONFIRMED;
+		this.orderStatus = OrderStatus.CONFIRMED;
 	}
 
 
 	public void placeOrder(int id, String remarks, ArrayList<MenuItem> mList) {
-        // TODO implement here
+        System.out.println("Order has been placed.");
+        System.out.println("Order id: " + id);
+        this.setId(id);
+        this.setRemarks(remarks);
+        this.setmList(mList);
         return;
     }
-
-    /**
-     * @return
-     */
+	
     public void printOrderReceipt() {
-        // TODO implement here
+    	System.out.println("Order Receipt:");
+    	MenuItem cur;
+    	float total=0;
+    	for(int i=0; i<this.mList.size();i++) {
+    		cur = this.mList.get(i);
+        	System.out.println("Name: " + cur.getName());
+        	System.out.println("Price: " + cur.getPrice());
+        	System.out.println("");
+        	total = total + cur.getPrice();
+    	}
+    	System.out.println("Total Price: " + total);
         return;
     }
     
     public float getMenuItemGrandTotal() {
-        // TODO implement here
-        return 0.0f;
+    	MenuItem cur;
+    	float total=0;
+    	for(int i=0; i<this.mList.size();i++) {
+    		cur = this.mList.get(i);
+        	total = total + cur.getPrice();
+    	}
+        return total;
     }
+    
 	public ArrayList<MenuItem> getmList() {
 		return mList;
 	}
+	
 	public void setmList(ArrayList<MenuItem> mList) {
 		this.mList = mList;
 	}
+	
 	public LocalDate getDateTime() {
 		return dateTime;
 	}
+	
 	public void setDateTime(LocalDate dateTime) {
 		this.dateTime = dateTime;
 	}
+	
 	public String getRemarks() {
 		return remarks;
 	}
+	
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+	
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public OrderStatus getOrderStatus() {
 		return orderStatus;
 	}
+	
 	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus;
 	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

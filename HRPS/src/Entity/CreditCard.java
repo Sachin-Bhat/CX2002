@@ -10,50 +10,14 @@ import java.io.Serializable;
  *
  */
 public class CreditCard implements Serializable {
-	/**
-     * Default constructor
-     */
-    public CreditCard() {
-    }
-
-    /**
-     * 
-     */
+	
     private static final long serialVersionUID = 1234L;
-
-    /**
-     * 
-     */
     public long cardNo;
-
-    /**
-     * 
-     */
     public int cvv;
-
-    /**
-     * 
-     */
     public CardType cType;
-
-    /**
-     * 
-     */
     public String name;
-
-    /**
-     * 
-     */
     public String country;
-
-    /**
-     * 
-     */
     public String address;
-
-    /**
-     * 
-     */
     public String exp;
 
     /**
@@ -65,126 +29,79 @@ public class CreditCard implements Serializable {
      * @param cvv 
      * @param exp
      */
-    public void CreditCard(String name, String country, String address, CardType cType, long cardNo, int cvv, String exp) {
-        // TODO implement here
+    public CreditCard() {
+    	
     }
+    
+    public CreditCard(long cardNo, int cvv, CardType cType, String name, String country, String address, String exp) {
+		super();
+		this.cardNo = cardNo;
+		this.cvv = cvv;
+		this.cType = cType;
+		this.name = name;
+		this.country = country;
+		this.address = address;
+		this.exp = exp;
+	}
 
-    /**
-     * @param cardNo 
-     * @return
-     */
-    public void setCardNo(long cardNo) {
-        // TODO implement here
-        return;
-    }
+	public long getCardNo() {
+		return cardNo;
+	}
 
-    /**
-     * @param cvv 
-     * @return
-     */
-    public void setCVV(int cvv) {
-        // TODO implement here
-        return;
-    }
+	public void setCardNo(long cardNo) {
+		this.cardNo = cardNo;
+	}
 
-    /**
-     * @param cType 
-     * @return
-     */
-    public void setCardType(CardType cType) {
-        // TODO implement here
-        return;
-    }
+	public int getCvv() {
+		return cvv;
+	}
 
-    /**
-     * @param name 
-     * @return
-     */
-    public void setName(String name) {
-        // TODO implement here
-        return;
-    }
+	public void setCvv(int cvv) {
+		this.cvv = cvv;
+	}
 
-    /**
-     * @param address 
-     * @return
-     */
-    public void setAddress(String address) {
-        // TODO implement here
-        return;
-    }
+	public CardType getcType() {
+		return cType;
+	}
 
-    /**
-     * @param country 
-     * @return
-     */
-    public void setCountry(String country) {
-        // TODO implement here
-        return;
-    }
+	public void setcType(CardType cType) {
+		this.cType = cType;
+	}
 
-    /**
-     * @param exp 
-     * @return
-     */
-    public void setExpiry(String exp) {
-        // TODO implement here
-        return;
-    }
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * @return
-     */
-    public long getCardNo() {
-        // TODO implement here
-        return 0;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    /**
-     * @return
-     */
-    public int getCVV() {
-        // TODO implement here
-        return 0;
-    }
+	public String getCountry() {
+		return country;
+	}
 
-    /**
-     * @return
-     */
-    public CardType getCardType() {
-        // TODO implement here
-        return null;
-    }
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
-    /**
-     * @return
-     */
-    public String getName() {
-        // TODO implement here
-        return "";
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    /**
-     * @return
-     */
-    public String getAddress() {
-        // TODO implement here
-        return "";
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    /**
-     * @return
-     */
-    public String getCountry() {
-        // TODO implement here
-        return "";
-    }
+	public String getExpiry() {
+		return exp;
+	}
 
-    /**
-     * @return
-     */
-    public String getExpiry() {
-        // TODO implement here
-        return "";
-    }
+	public void setExpiry(String exp) {
+		this.exp = exp;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

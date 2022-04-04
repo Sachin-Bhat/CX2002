@@ -18,31 +18,19 @@ import java.io.ObjectInputStream;
  *
  */
 public class RoomServiceBill extends Bill {
-	/**
-     * Default constructor
-     */
-    public RoomServiceBill() {
-    }
-
-    /**
-     * 
-     */
+	
     private int rsId;
-
-    /**
-     * 
-     */
     private LocalDate dateTime;
-
-    /**
-     * 
-     */
     private OrderStatus orderStatus;
 
     /**
      * @param list 
      * @param rs
      */
+    public RoomServiceBill() {
+    	
+    }
+    
     public RoomServiceBill(ArrayList<MenuItem> list, RoomService rs) {
         // TODO implement here
     }

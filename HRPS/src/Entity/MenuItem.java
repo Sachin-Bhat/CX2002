@@ -28,10 +28,17 @@ public class MenuItem implements Serializable {
     public MenuItem() {
     	
     }
-    public MenuItem(int id, String name, String description, float price) {
-        // TODO implement here
-    }
     
+    
+	public MenuItem(int id, String name, String description, float price) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.id = id;
+		this.price = price;
+	}
+
+
 	public String getName() {
 		return name;
 	}

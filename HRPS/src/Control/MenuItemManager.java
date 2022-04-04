@@ -19,7 +19,7 @@ public class MenuItemManager {
     private FileIOHandler fileIO;
     private int count = 1;
     private Scanner sc = new Scanner(System.in);
-    private ArrayList<MenuItem> menu;
+    private static ArrayList<MenuItem> menu = new ArrayList<MenuItem>();
 
     /**
      * Overloaded constructor for MenuItemManager
@@ -52,12 +52,12 @@ public class MenuItemManager {
         description = sc.nextLine();
         System.out.println("Enter price of item: ");
         price = sc.nextFloat();
-        newItem = new MenuItem(this.menu.size(), name, description, price);
-        this.menu.add(newItem);
+        newItem = new MenuItem(MenuItemManager.menu.size(), name, description, price);
+        MenuItemManager.menu.add(newItem);
         System.out.println("Item: " + name);
         System.out.println("Description: " + description);
         System.out.println("Price: " + price);
-        System.out.println("Assigned itemID of " + this.menu.indexOf(newItem));
+        System.out.println("Assigned itemID of " + MenuItemManager.menu.indexOf(newItem));
         return;
     }
 
@@ -71,7 +71,7 @@ public class MenuItemManager {
   
     public MenuItem searchMenuItem(String name) {
     	MenuItem cur;
-        for(int i=0;i<this.menu.size();i++) {
+        for(int i=0;i<MenuItemManager.menu.size();i++) {
         	cur = menu.get(i);
         	if(cur.getName()==name) {
         		return cur;
@@ -87,7 +87,7 @@ public class MenuItemManager {
   
     private void updateMenu() {
     	MenuItem cur;
-    	for(int i=0;i<this.menu.size();i++) {
+    	for(int i=0;i<MenuItemManager.menu.size();i++) {
     		cur = menu.get(i);
     		cur.setId(i);
     		menu.set(i, cur);
@@ -101,7 +101,7 @@ public class MenuItemManager {
      */
     public void listMenuItems() {
     	MenuItem cur;
-    	for(int i=0;i<this.menu.size();i++) {
+    	for(int i=0;i<MenuItemManager.menu.size();i++) {
     		cur = menu.get(i);
         	System.out.println("Name: " + cur.getName());
         	System.out.println("Description: " + cur.getDescription());
@@ -117,14 +117,9 @@ public class MenuItemManager {
      */
     public void removeMenuItem(String name) {
     	MenuItem toDelete = searchMenuItem(name);
-    	MenuItem cur;
     	int deleteID = toDelete.getId();
     	menu.remove(deleteID);
-    	for(int i=deleteID;i<this.menu.size();i++) {
-    		cur = menu.get(i);
-    		cur.setId(i);
-    		menu.set(i, cur);
-    	}
+    	updateMenu();
         return;
     }
 
@@ -177,11 +172,11 @@ public class MenuItemManager {
      * @return
      */
     public ArrayList<MenuItem> selectMenuItem() {
-        ArrayList<MenuItem> order;
+        ArrayList<MenuItem> order = new ArrayList<MenuItem>();
         MenuItem add;
-        String select = "";
+        String select = " ";
         this.listMenuItems();
-        while(1) {
+        while(true) {
         	System.out.println("Please select an item or 'N' to terminate: ");
         	select = sc.nextLine();
         	if(select=="n" || select=="N") {
