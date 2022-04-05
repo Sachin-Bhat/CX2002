@@ -16,8 +16,10 @@ public class RoomManager {
     public RoomManager() {}
     private ArrayList<Room> roomList;
     private FileIOHandler fileIO = new FileIOHandler();
-    private final int MAX_ROOMS = 48;
+    private int count = 1;
     private Scanner sc;
+    private final int FLOORS = 6;
+    private final int ROOMS_PER_FLOOR = 8;
 
     /**
      * Overloaded constructor for RoomManager
@@ -29,11 +31,16 @@ public class RoomManager {
      * @param sc
      */
     public RoomManager(Scanner sc) {
-        // TODO implement here
-        private final int FLOORS = 6;
-        private final int ROOMS_PER_FLOOR = 8;
+        this.sc = sc;
+        roomList = new ArrayList<Roomt>();
+        fileIO = new FileIOHandler();
 
-
+        Object[] objList = fileIO.readObject(Room.class);
+        for (Object o : objList) {
+            Room room = (Room) o;
+            roomList.add(room);
+        }
+        count = roomList.size() + 1;
     }
 
     /**
@@ -43,9 +50,27 @@ public class RoomManager {
      * @return
      */
     private float assignRate(RoomType rType, BedType bType) {
-        // TODO implement here
-        //do i assign each type to a rate and add??
-        return 0.0f;
+        float rate=0;
+        //rates are cost per night in SGD
+        //add rate of rType
+        if(rType == RoomType.SINGLE){
+            rate += 200.00f; //edit for SINGLE rate
+        }else if(rType == RoomType.DOUBLE){
+            rate += 300.00f; //edit for DOUBLE rate
+        }else if(rType == RoomType.DELUXE){
+            rate += 500.00f; //edit for DELUXE rate
+        }else if(rType == RoomType.VIP){
+            rate += 800.00f; //edit for VIP rate
+        }
+        //add rate of bType
+        if(bType == BedType.SINGLE){
+            rate += 80.00f; //edit for SINGLE rate
+        }else if(bType == BedType.DOUBLE){
+            rate += 100.00f; //edit for DOUBLE rate
+        }else if(bType == BedType.MASTER){
+            rate += 150.00f; //edit for MASTER rate
+        }
+        return rate;
     }
 
     /**
@@ -88,7 +113,7 @@ public class RoomManager {
                     System.out.println("No such option");
                     break;
             }
-        } while (option!=1 && option!=2 && option!=3 && option!=4);
+        } while (option!=1 && option!=4);
         return rType;
     }
 
@@ -129,7 +154,7 @@ public class RoomManager {
                     System.out.println("No such option");
                     break;
             }
-        } while (option != 1 && option != 2 && option != 3);
+        } while (option != 1 && option != 3);
         return bType;
     }
 
@@ -173,7 +198,7 @@ public class RoomManager {
                     System.out.println("No such option");
                     break;
             }
-        } while (option != 1 && option != 2 && option != 3 && option != 4);
+        } while (option != 1 && option != 4);
         return bType;
     }
 
@@ -255,23 +280,21 @@ public class RoomManager {
      */
     private void updateRoomMenu() {
         System.out.println("\n~--------------------------------~");
-        System.out.println("! What needs to be updated:      !");
-        System.out.println("! 0. Nothing                     !");
-        System.out.println("! 1. ID                          !");
-        System.out.println("! 2. Room Type                   !");
-        System.out.println("! 3. Rate                        !");
-        System.out.println("! 4. Bed Type                    !");
-        System.out.println("! 5. Availability                !");
-        System.out.println("! 6. Has Wifi                    !");
-        System.out.println("! 7. Is Smoking                  !");
-        System.out.println("! 8. View                        !");
-        System.out.println("! 9. Level                       !");
-        System.out.println("! 10. Numbe                      !");
-        System.out.println("! 11. All details                !");
+        System.out.println("Options to update:                ");
+        System.out.println("\t 0. Nothing else                ");
+        System.out.println("\t 1. ID                          ");
+        System.out.println("\t 2. Room Type                   ");
+        System.out.println("\t 3. Rate                        ");
+        System.out.println("\t 4. Bed Type                    ");
+        System.out.println("\t 5. Availability                ");
+        System.out.println("\t 6. Has Wifi                    ");
+        System.out.println("\t 7. Is Smoking                  ");
+        System.out.println("\t 8. View                        ");
+        System.out.println("\t 9. Level                       ");
+        System.out.println("\t 10. Number                     ");
+        System.out.println("\t 11. All details                ");
         System.out.println("~--------------------------------~");
-        System.out.print("Enter an option: ");
     }
-
     /**
      * allow user to update room details after providing updateRoomMenu() and
      * update to file
@@ -280,8 +303,88 @@ public class RoomManager {
      * @return
      */
     public void updateRoom(String room) {
-        // TODO implement here
-        return;
+        int updateChoice = -1;
+        if (room == null) {
+            System.out.println("Room was not found");
+        }
+        else {
+            do {
+                updateRoomMenu();
+                updateChoice = verifyOption(updateChoice, "Enter an option: ");
+                switch(updateChoice) {
+                    case 0:
+                        System.out.println("Room details are :");
+                        listRoomDetails();
+                        break;
+                    case 1: //Updating id
+                        System.out.print("Enter ID to update: ");
+                        room.setId(sc.nextLine());
+                        break;
+                    case 2: //Updating room type
+                        room.setRType(chooseRoomType(sc));
+                        room.setRate(assignRate(room.getRType, room.getBType)); //auto-update new rate
+                        break;
+                    case 3: //Updating rate
+                        System.out.print("Updating rate...");
+                        room.setRate(assignRate(room.getRType, room.getBType));
+                        break;
+                    case 4: //Updating bed type
+                        room.setBType(chooseBedType(sc));
+                        room.setRate(assignRate(room.getRType, room.getBType)); //auto-update new rate
+                        break;
+                    case 5: //Updating availability
+                        room.setAvailStatus(chooseAvailabilityStatus(sc));
+                        break;
+                    case 6: //Updating wifi
+                        room.setWifi(chooseWifi(sc));
+                        break;
+                    case 7: //Updating smoking
+                        room.setSmoking(chooseSmoking(sc));
+                        break;
+                    case 8: //Updating view
+                        System.out.println("Enter new view description: ");
+                        room.setView(sc.nextLine());
+                        break;
+                    case 9: //Updating room level
+                        int num=0;
+                        do {
+                            System.out.print("Enter new level: ");
+                            num = sc.nextInt;
+                            if(verifyRoom(num, room.getRNo).getAvailStatus!=AvailabilityStatus.VACANT){
+                                System.out.println("Room already occupied.");
+                                break;
+                            }
+                            if(num>=2 && num<=7){
+                                room.setRLevel(num);
+                                System.out.println("New level set.");
+                            }else System.out.println("Invalid level.");
+                        }while(num>=2 && num <=7);
+                        break;
+
+                    case 10: //Updating room number
+                        do {
+                            System.out.print("Enter new room number: ");
+                            num = sc.nextInt;
+                            if(verifyRoom(room.getRLevel, num).getAvailStatus!=AvailabilityStatus.VACANT){
+                                System.out.println("Room already occupied.");
+                                break;
+                            }
+                            if(num>=1 && num<=8){
+                                room.setRLevel(num);
+                                System.out.println("New room number set.");
+                            }else System.out.println("Invalid room number.");
+                        }while(num>=1 && num <=8);
+                        break;
+
+                    case 11:
+                        break;
+                    default:
+                        System.out.println("No such option");
+                        break;
+                }
+            } while (updateChoice != 0);
+        }
+        fileIO.writeObject(roomList.toArray(), Room.class);
     }
 
     /**
@@ -298,7 +401,7 @@ public class RoomManager {
         System.out.println("\t Room WiFi option: "+r.getWifi());
         System.out.println("\t Room Smoking option: "+r.getSmoking());
         System.out.println("\t Room view: "+r.getView());
-        System.out.printf("\t Room level: %02d%n-%02d%n", r.getRLevel(), r.getRNo());
+        System.out.println("\t Room Number: ");room.levelNumToString();
     }
 
     /**
@@ -321,7 +424,11 @@ public class RoomManager {
      * @return
      */
     private Room verifyRoom(int rLevel, int rNo) {
-        // TODO implement here
+        for(Room r : roomList){
+            if(r.getRLevel == rLevel && r.getRNo == rNo){
+                return r;
+            }
+        }
         return null;
     }
 
@@ -359,6 +466,32 @@ public class RoomManager {
      */
     public void listRoomsByOccupancyRate() {
         // TODO implement here
+        // room is vacant, categorize by rType
+        System.out.println("Listing rooms by occupancy: ");
+        System.out.println("- SINGLE: ");
+        for(Room r : roomList){
+            if(r.getAvailStatus==AvailabilityStatus.VACANT && r.getRType==RoomType.SINGLE){
+                r.levelNumToString(); System.out.print(", ");
+            }
+        }
+        System.out.println("- DOUBLE: ");
+        for(Room r : roomList){
+            if(r.getAvailStatus==AvailabilityStatus.VACANT && r.getRType==RoomType.DOUBLE){
+                r.levelNumToString(); System.out.print(", ");
+            }
+        }
+        System.out.println("- DELUXE: ");
+        for(Room r : roomList){
+            if(r.getAvailStatus==AvailabilityStatus.VACANT && r.getRType==RoomType.DELUXE){
+                r.levelNumToString(); System.out.print(", ");
+            }
+        }
+        System.out.println("- VIP: ");
+        for(Room r : roomList){
+            if(r.getAvailStatus==AvailabilityStatus.VACANT && r.getRType==RoomType.VIP){
+                r.levelNumToString(); System.out.print(", ");
+            }
+        }
         return;
     }
 
@@ -368,6 +501,7 @@ public class RoomManager {
      */
     public void listRoomsByRoomStatus() {
         // TODO implement here
+        //sweep search using availstatus
         return;
     }
 
@@ -420,12 +554,16 @@ public class RoomManager {
     /**
      * lists room details by room number
      *
+     * @param rLevel
      * @param rNum
      * @return
      */
-    public void listRoomDetailsByRNo(String rNum) {
-        // TODO implement here
-        return;
+    public void listRoomDetailsByRNo(int rLevel, int rNum) {
+        for(Room r : roomList){
+            if(r.getRLevel == rLevel && r.getRNo == rNum){
+                listRoomDetails(r);
+            }
+        }
     }
 
     /**
