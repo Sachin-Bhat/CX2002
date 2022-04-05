@@ -4,6 +4,7 @@
     <list default="true" id="6eaebee5-222a-4665-a55a-f6e5fbdd8c3b" name="Changes" comment="Implemented menus and selection CLI methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HRPS/src/Control/RoomManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/HRPS/src/Control/RoomManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HRPS/src/Entity/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/HRPS/src/Entity/Room.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
