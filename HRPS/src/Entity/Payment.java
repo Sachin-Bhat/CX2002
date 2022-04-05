@@ -1,8 +1,4 @@
-/**
- * 
- */
 package Entity;
-
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -17,36 +13,14 @@ import Entity.OrderStatus;
  *
  */
 public class Payment {
-	
 	/**
      * Default constructor
      */
-    public Payment() {
-    }
-
-    /**
-     * 
-     */
+    public Payment() {}
     private double taxRate;
-
-    /**
-     * 
-     */
     private double discountRate;
-
-    /**
-     * 
-     */
     private double weekendRate;
-
-    /**
-     * 
-     */
     private Reservation rez;
-
-    /**
-     * 
-     */
     private Scanner sc;
 
     /**
@@ -56,7 +30,6 @@ public class Payment {
      * @param sc
      */
     public Payment(Reservation rez, Scanner sc) {
-        // TODO implement here
         this.taxRate = 0.08;
         this.weekendRate = 1.25;
         this.discountRate = 0.2;
@@ -68,7 +41,6 @@ public class Payment {
      * @return
      */
     public void invoiceSummary() {
-        // TODO implement here
         System.out.println("\nHotel Checkout Invoice Summary");
         System.out.println("Total Room Charge(Weekdays: "+ calcWeekdays() +", Weekends: "+ calcWeekends() +"): " + "$SGD" + calcRoomCharge());
         if (rs.getRoomServiceList().size() != 0) {
@@ -81,24 +53,17 @@ public class Payment {
             System.out.printf("Discount: - $SGD%.2f\n",calcDiscount());
         System.out.printf("Tax : + $SGD%.2f\n",calcTax());
         System.out.printf("Total bill is: $SGD%.2f",calcGrandTotal());
-        return;
     }
 
     /**
      * @param bill 
      * @return
      */
-    public void invoiceSummary(Bill bill) {
-        // TODO implement here
-        bill.printReceipt();
-        return;
-    }
-
+    public void invoiceSummary(Bill bill) {bill.printReceipt();}
     /**
      * @return
      */
     private void getRoomServicePriceList() {
-        // TODO implement here
         ArrayList<RoomService> rsList = rez.getRoomServiceList();
         for (RoomService rs : rsList) {
             System.out.println("Room Service <"+ rsList.indexOf(rs)+1 +">");
@@ -106,28 +71,24 @@ public class Payment {
             rs.setOrderStatus(OrderStatus.DELIVERED);
             rs.printOrderReceipt();
         }
-        return;
     }
 
     /**
      * @return
      */
     private void paymentMenu() {
-        // TODO implement here
         System.out.println("\n~--------------------------------~");
         System.out.println("! Payment by:                    !");
         System.out.println("! 1. Cash                        !");
         System.out.println("! 2. Credit Card                 !");
         System.out.println("~--------------------------------~");
         System.out.print("Enter an option: ");
-        return;
     }
 
     /**
      * @return
      */
     public void paymentByCashOrCredit() {
-        // TODO implement here
         int updateChoice = -1;
         do {
             payMenu();
@@ -156,14 +117,12 @@ public class Payment {
             }
 
         } while (updateChoice != 1 && updateChoice != 2);
-        return;
     }
 
     /**
      * @return
      */
     public int calcWeekends() {
-        // TODO implement here
         int noWeekend = 0;
         Period stayed = Period.between(rez.getCheckInDate(), rez.getCheckOutDate()); //Get the period between check in date and check out date.
         int totalDays = stayed.getDays(); //Calculate the total days between check in date and check out date.
@@ -179,7 +138,6 @@ public class Payment {
      * @return
      */
     public int calcWeekdays() {
-        // TODO implement here
         int noWeekday = 0;
         Period stayed = Period.between(rez.getCheckInDate(), rez.getCheckOutDate()); //Get the period between check in date and check out date.
         int totalDays = stayed.getDays(); //Calculate the total days between check in date and check out date.
@@ -195,7 +153,6 @@ public class Payment {
      * @return
      */
     public float calcRoomCost() {
-        // TODO implement here
         float totalPrice = 0;
         Period stayed = Period.between(rez.getCheckInDate(), rez.getCheckOutDate()); //Get the period between check in date and check out date.
         int totalDays = stayed.getDays(); //Calculate the total days between check in date and check out date.
@@ -217,82 +174,48 @@ public class Payment {
      * @return
      */
     public double calcDiscount() {
-        // TODO implement here
         return (rez.getRoomServicePrice() + calcRoomCharge()) * discountRate;
-
     }
-
     /**
      * @return
      */
     public double calcTax() {
-        // TODO implement here
         return (rez.getRoomServicePrice() + calcRoomCost() - calcDiscount()) * taxRate;
-
     }
-
     /**
      * @return
      */
     public double calcGrandTotal() {
-        // TODO implement here
         return (rez.getRoomServicePrice() + calculateRoomCost() - calcDiscount()) + calcTax();
-
     }
 
     /**
      * @param taxRate 
      * @return
      */
-    public void setTaxRate(double taxRate) {
-        // TODO implement here
-        this.taxRate = taxRate;
-        return;
-    }
-
+    public void setTaxRate(double taxRate) {this.taxRate = taxRate;}
     /**
      * @param discountRate 
      * @return
      */
-    public void setDiscountRate(double discountRate) {
-        // TODO implement here
-        THIS.discountRate = discountRate;
-        return;
-    }
-
+    public void setDiscountRate(double discountRate) {this.discountRate = discountRate;}
     /**
      * @param weekendRate 
      * @return
      */
-    public void setWeekendRate(double weekendRate) {
-        // TODO implement here
-        this.weekendRate = weekendRate;
-        return;
-    }
-
+    public void setWeekendRate(double weekendRate) {this.weekendRate = weekendRate;}
     /**
      * @return
      */
-    public double getTaxRate() {
-        // TODO implement here
-        return taxRate;
-    }
-
+    public double getTaxRate() {return taxRate;}
     /**
      * @return
      */
-    public double getDiscountRate() {
-        // TODO implement here
-        return discountRate;
-    }
-
+    public double getDiscountRate() {return discountRate;}
     /**
      * @return
      */
-    public double getWeekendRate() {
-        // TODO implement here
-        return weekendRate;
-    }
+    public double getWeekendRate() {return weekendRate;}
 
     /**
      * @param option 
@@ -300,7 +223,6 @@ public class Payment {
      * @return
      */
     private int verifyOption(int option, String input) {
-        // TODO implement here
         boolean invalid = true;
 
 		while (invalid) {
@@ -316,6 +238,5 @@ public class Payment {
 			}
 		}
         return option;
-
     }
 }

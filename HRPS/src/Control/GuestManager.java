@@ -18,29 +18,11 @@ public class GuestManager {
 	/**
      * Default constructor for GuestManager
      */
-    public GuestManager() {
-    }
-
-    /**
-     * 
-     */
+    public GuestManager() {}
     private ArrayList<Guest> guestList;
-
-    /**
-     * 
-     */
     private FileIOHandler fileIO;
-
-    /**
-     * 
-     */
     private int count = 1;
-
-    /**
-     * 
-     */
     private Scanner sc;
-
     /**
      * Overloaded constructor
      * used in initialising a few variables
@@ -48,7 +30,6 @@ public class GuestManager {
      * @param sc
      */
     public GuestManager(Scanner sc) {
-        // TODO implement here
     	this.sc = sc;
 		guestList = new ArrayList<Guest>();
 		fileIO = new FileIOHandler();
@@ -66,7 +47,6 @@ public class GuestManager {
      * @return guest
      */
     public Guest addGuest() {
-        // TODO implement here
     	Guest guest = null;
     	char gender;
 		String id, name, address, country, nationality, exp = "";
@@ -116,7 +96,6 @@ public class GuestManager {
 		fileIO.writeObject(guestList.toArray(), guest.getClass());
 		
 		return guest;
-        
     }
 
     /**
@@ -126,7 +105,6 @@ public class GuestManager {
      * @return guest, null
      */
     public Guest searchGuest(String name) {
-        // TODO implement here
     	if (guestList.size() == 0) {
 			return null;
 		}
@@ -144,13 +122,11 @@ public class GuestManager {
      * @return
      */
     public void listDetailsGuest(String name) {
-        // TODO implement here
     	Guest guest = searchGuest(name);
 		if (guest != null)
 			printDetailsGuest(guest);
 		else 
 			System.out.println("Guest was not found...");
-        return;
     }
 
     /**
@@ -159,7 +135,6 @@ public class GuestManager {
      * @return
      */
     public void printDetailsGuest(Guest g) {
-        // TODO implement here
     	System.out.println("\nGuest Details: ");
 		System.out.println("\tName: " + g.getName());
 		System.out.println("\tPassport No: " + g.getId());
@@ -177,7 +152,6 @@ public class GuestManager {
 		System.out.println("\tHolder Name: " + g.getCreditCard().getName());
 		System.out.println("\tAddress: " + g.getCreditCard().getAddress());
 		System.out.println("\tCountry: " + g.getCreditCard().getCountry());
-        return;
     }
 
     /**
@@ -186,7 +160,6 @@ public class GuestManager {
      * @return
      */
     public void updateDetailsGuest(Guest g) {
-        // TODO implement here
     	int updateChoice = -1;
 		if (g == null) {
 			System.out.println("Guest was not found");
@@ -269,7 +242,6 @@ public class GuestManager {
 		}
 		
 		fileIO.writeObject(guestList.toArray(), Guest.class);
-        return;
     }
 
     /**
@@ -278,10 +250,8 @@ public class GuestManager {
      * @return
      */
     public void updateDetailsGuest(String name) {
-        // TODO implement here
     	Guest guest = searchGuest(name);
 		updateDetailsGuest(guest);
-        return;
     }
 
     /**
@@ -289,7 +259,6 @@ public class GuestManager {
      * @return
      */
     private void updateMenuGuest() {
-        // TODO implement here
     	System.out.println("\n~--------------------------------~");
 		System.out.println("! What needs to be updated:      !");
 		System.out.println("! 0. Nothing                     !");
@@ -304,7 +273,6 @@ public class GuestManager {
 		System.out.println("! 9. All details                 !");
 		System.out.println("~--------------------------------~");
 		System.out.print("Enter an option: ");
-        return;
     }
 
     /**
@@ -312,7 +280,6 @@ public class GuestManager {
      * @return
      */
     private void updateMenuCreditCard() {
-        // TODO implement here
     	System.out.println("\n~--------------------------------~");
 		System.out.println("! What needs to be updated:      !");
 		System.out.println("! 0. Nothing                     !");
@@ -326,7 +293,6 @@ public class GuestManager {
 		System.out.println("! 8. All details                 !");
 		System.out.println("~--------------------------------~");
 		System.out.print("Enter an option: ");
-        return;
     }
 
     /**
@@ -337,7 +303,6 @@ public class GuestManager {
      * @return
      */
     private void updateCreditCard(Guest g) {
-        // TODO implement here
     	int updateChoice = -1, cvv = -1;
 		long cardNo = 0;
 		String exp = null;
@@ -412,7 +377,6 @@ public class GuestManager {
 					break;
 			}
 		} while(updateChoice != 0 && updateChoice != 8);
-        return;
     }
 
     /**
@@ -420,7 +384,6 @@ public class GuestManager {
      * @return cType
      */
     private CardType getCardType() {
-        // TODO implement here
     	int option = -1;
 		CardType cType = null;
 		
@@ -448,7 +411,6 @@ public class GuestManager {
 		} while (option != 1 && option != 2);
 		
 		return cType;
-        
     }
 
     /**
@@ -458,7 +420,6 @@ public class GuestManager {
      * @return
      */
     private Guest getGuestById(int guestId) {
-        // TODO implement here
     	Guest guest = null;
 		
 		for (Guest temp : guestList) {
@@ -468,7 +429,6 @@ public class GuestManager {
 			}
 		}
 		return guest;
-        
     }
 
     /**
@@ -478,7 +438,6 @@ public class GuestManager {
      * @return option
      */
     private int verifyOption(int option, String input) {
-        // TODO implement here
     	boolean invalid = true;
 		
 		while (invalid) {
@@ -503,7 +462,6 @@ public class GuestManager {
      * @return cardNum
      */
     private long verifyCard(long cardNum, String input) {
-        // TODO implement here
     	boolean invalid = true;
 		
 		while (invalid) {
@@ -527,7 +485,6 @@ public class GuestManager {
      * @return expiry
      */
     private String verifyExpiry(String expiry, String input) {
-        // TODO implement here
     	boolean invalid = true;
     	int	isNum1 = 0, isNum2 = 0;
 		
@@ -561,7 +518,6 @@ public class GuestManager {
      * @return 0, 1
      */
     private int isInt(String input) {
-        // TODO implement here
     	try {
 			Integer.parseInt(input);
 			return 1;
