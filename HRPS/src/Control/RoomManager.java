@@ -292,7 +292,6 @@ public class RoomManager {
         System.out.println("\t 8. View                        ");
         System.out.println("\t 9. Level                       ");
         System.out.println("\t 10. Number                     ");
-        System.out.println("\t 11. All details                ");
         System.out.println("~--------------------------------~");
     }
     /**
@@ -312,7 +311,7 @@ public class RoomManager {
                 updateRoomMenu();
                 updateChoice = verifyOption(updateChoice, "Enter an option: ");
                 switch(updateChoice) {
-                    case 0:
+                    case 0: //nothing left, room summary
                         System.out.println("Room details are :");
                         listRoomDetails();
                         break;
@@ -375,9 +374,6 @@ public class RoomManager {
                             }else System.out.println("Invalid room number.");
                         }while(num>=1 && num <=8);
                         break;
-
-                    case 11:
-                        break;
                     default:
                         System.out.println("No such option");
                         break;
@@ -401,7 +397,7 @@ public class RoomManager {
         System.out.println("\t Room WiFi option: "+r.getWifi());
         System.out.println("\t Room Smoking option: "+r.getSmoking());
         System.out.println("\t Room view: "+r.getView());
-        System.out.println("\t Room Number: ");room.levelNumToString();
+        System.out.println("\t Room Number: "); r.levelNumToString();
     }
 
     /**
@@ -435,12 +431,45 @@ public class RoomManager {
     /**
      * create and add a room to list of rooms and
      * update to file
-     *
+     * @param sc
      * @return
      */
-    public void addRoom() {
-        // TODO implement here
-        return;
+    public void addRoom(Scanner sc) {
+        Room room = null;
+
+        System.out.print("Enter room id: ");
+        int id = sc.nextInt();
+        System.out.print("Enter room level: ");
+        int level = sc.nextInt();
+        System.out.print("Enter room number: ");
+        int num = sc.nextInt();
+
+        //check if room is vacant using lev and no, if taken then break
+        if(!isVacantRoom(verifyRoom(level,num))){
+            System.out.println("Room already occupied.");
+            break;
+        }
+
+        RoomType rType = chooseRoomType(sc);
+        BedType bType = chooseBedType(sc);
+        //autosetting rate
+        float rate = assignRate(rType, bType);
+
+        AvailabilityStatus aStatus = chooseAvailabilityStatus(sc);
+        boolean wifi = chooseWifi(sc);
+        boolean smoking = chooseSmoking(sc);
+
+        System.out.print("Enter view description: ");
+        String view = sc.nextLine();
+
+        //constructor
+        room = new Room(id, rType, rate, bType, aStatus, wifi, smoking, view, level, num);
+        count++;
+
+        roomList.add(room);
+        System.out.println("Room added successfully!");
+
+        fileIO.writeObject(roomList.toArray(), room.getClass());
     }
 
     /**
@@ -465,34 +494,32 @@ public class RoomManager {
      * @return
      */
     public void listRoomsByOccupancyRate() {
-        // TODO implement here
-        // room is vacant, categorize by rType
+        // list room by vacancy, categorize by rType
         System.out.println("Listing rooms by occupancy: ");
         System.out.println("- SINGLE: ");
         for(Room r : roomList){
-            if(r.getAvailStatus==AvailabilityStatus.VACANT && r.getRType==RoomType.SINGLE){
+            if(isVacantRoom(r) && r.getRType==RoomType.SINGLE){
                 r.levelNumToString(); System.out.print(", ");
             }
         }
         System.out.println("- DOUBLE: ");
         for(Room r : roomList){
-            if(r.getAvailStatus==AvailabilityStatus.VACANT && r.getRType==RoomType.DOUBLE){
+            if(isVacantRoom(r) && r.getRType==RoomType.DOUBLE){
                 r.levelNumToString(); System.out.print(", ");
             }
         }
         System.out.println("- DELUXE: ");
         for(Room r : roomList){
-            if(r.getAvailStatus==AvailabilityStatus.VACANT && r.getRType==RoomType.DELUXE){
+            if(isVacantRoom(r) && r.getRType==RoomType.DELUXE){
                 r.levelNumToString(); System.out.print(", ");
             }
         }
         System.out.println("- VIP: ");
         for(Room r : roomList){
-            if(r.getAvailStatus==AvailabilityStatus.VACANT && r.getRType==RoomType.VIP){
+            if(isVacantRoom(r) && r.getRType==RoomType.VIP){
                 r.levelNumToString(); System.out.print(", ");
             }
         }
-        return;
     }
 
     /**
@@ -500,22 +527,45 @@ public class RoomManager {
      * @return
      */
     public void listRoomsByRoomStatus() {
-        // TODO implement here
-        //sweep search using availstatus
-        return;
+        // list ALL rooms by status type
+        System.out.println("Listing rooms by availability: ");
+        System.out.println("- VACANT: ");
+        for(Room r : roomList){
+            if(r.getAvailStatus()==AvailabilityStatus.VACANT){
+                r.levelNumToString(); System.out.print(", ");
+            }
+        }
+        System.out.println("- OCCUPIED: ");
+        for(Room r : roomList){
+            if(r.getAvailStatus()==AvailabilityStatus.OCCUPIED){
+                r.levelNumToString(); System.out.print(", ");
+            }
+        }
+        System.out.println("- RESERVED: ");
+        for(Room r : roomList){
+            if(r.getAvailStatus()==AvailabilityStatus.RESERVED{
+                r.levelNumToString(); System.out.print(", ");
+            }
+        }
+        System.out.println("- UNDER_MAINTENANCE: ");
+        for(Room r : roomList){
+            if(r.getAvailStatus()==AvailabilityStatus.UNDER_MAINTENANCE){
+                r.levelNumToString(); System.out.print(", ");
+            }
+        }
     }
 
     /**
-     * return room if vacant
-     * null otherwise
+     * return true if vacant
+     * false otherwise
      *
      * @param room
      * @return
      */
-    public Room returnVacantRoom(Room room) {
-        if(room.getAvaiLStatus() == VACANT){
-            return room;
-        }else return null;
+    public boolean isVacantRoom(Room room) {
+        if(room.getAvailStatus() == AvailabilityStatus.VACANT){
+            return true;
+        }else return false;
     }
 
     /**
@@ -529,8 +579,17 @@ public class RoomManager {
      * @return
      */
     public void shiftRoom(Room oldR, Room newR) {
-        // TODO implement here
-        return;
+        if(isVacantRoom(newR)){
+            tempNo = oldR.getRNo();
+            tempLevel = oldR.getRLevel();
+
+            oldR.setRNo(newR.getRNo());
+            oldR.setRLevel(newR.getRLevel);
+            newR.setRNo(tempNo);
+            newR.setRLevel(tempLevel);
+        }else{
+            System.out.println("New room isn't vacant at the moment.");
+        }
     }
 
     /**

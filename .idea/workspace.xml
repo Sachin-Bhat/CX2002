@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6eaebee5-222a-4665-a55a-f6e5fbdd8c3b" name="Changes" comment="Added utility print function for reusability">
+    <list default="true" id="6eaebee5-222a-4665-a55a-f6e5fbdd8c3b" name="Changes" comment="Implemented most remaining functions for RoomManager.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HRPS/src/Control/RoomManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/HRPS/src/Control/RoomManager.java" afterDir="false" />
     </list>
@@ -52,7 +52,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649133193813</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Implemented most remaining functions for RoomManager.java">
+      <created>1649134749123</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1649134749123</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -71,6 +78,7 @@
     <MESSAGE value="Updated Guest, Room and RoomManager classes." />
     <MESSAGE value="Implemented menus and selection CLI methods" />
     <MESSAGE value="Added utility print function for reusability" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added utility print function for reusability" />
+    <MESSAGE value="Implemented most remaining functions for RoomManager.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented most remaining functions for RoomManager.java" />
   </component>
 </project>
