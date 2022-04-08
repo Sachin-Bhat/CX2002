@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6eaebee5-222a-4665-a55a-f6e5fbdd8c3b" name="Changes" comment="Updated RoomManager.java methods">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="6eaebee5-222a-4665-a55a-f6e5fbdd8c3b" name="Changes" comment="adding gitignore files for unneeded IDEA config files">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +65,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649390983286</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="adding gitignore files for unneeded IDEA config files">
+      <created>1649391884759</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1649391884759</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -86,6 +93,7 @@
     <MESSAGE value="Added utility print function for reusability" />
     <MESSAGE value="Implemented most remaining functions for RoomManager.java" />
     <MESSAGE value="Updated RoomManager.java functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated RoomManager.java functions" />
+    <MESSAGE value="adding gitignore files for unneeded IDEA config files" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding gitignore files for unneeded IDEA config files" />
   </component>
 </project>
