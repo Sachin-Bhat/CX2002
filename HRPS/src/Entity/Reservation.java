@@ -15,6 +15,7 @@ import Entity.OrderStatus;
  */
 public class Reservation implements Serializable {
 
+
 	private int rezCode;
 	private Guest guest;
 	private Room room;
@@ -199,4 +200,6 @@ public class Reservation implements Serializable {
 	
 	
 	
+}
+=======
 }

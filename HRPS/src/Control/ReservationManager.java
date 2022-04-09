@@ -490,3 +490,15 @@ public class ReservationManager {
 	}
 }
 
+=======
+    /**
+     * check out the guest from the hotel and
+     * update to file
+     * @return
+     */
+    public Reservation checkOut() {
+        // TODO implement here
+        return null;
+    }
+}
+

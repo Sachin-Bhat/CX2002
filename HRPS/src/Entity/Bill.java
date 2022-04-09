@@ -1,6 +1,3 @@
-/**
- * 
- */
 package Entity;
 
 import java.util.ArrayList;
@@ -10,53 +7,44 @@ import java.util.ArrayList;
  *
  */
 public class Bill {
-	
-	/**
-     * Default constructor
-     */
-    public Bill() {
-    }
 
-    /**
-     * 
-     */
     protected double grandTotal;
-
-    /**
-     * 
-     */
     protected ArrayList<?> itemList;
-
+    
     /**
      * @param items 
      * @param total
      */
-    public void Bill(ArrayList<?> items, double total) {
+    public Bill() {}
+    
+    public Bill(ArrayList<?> items, double total) {
         // TODO implement here
+    	this.grandTotal = total;
+    	this.itemList = items;
     }
 
     /**
-     * @return
+     * prints grandTotal
      */
     public void printReceipt() {
         // TODO implement here
-        return;
+        System.out.println("Receipt: $" + String.format("%.2f", this.grandTotal));
     }
 
     /**
-     * @return
+     * @return this.grandTotal
      */
     public double getGrandTotal() {
         // TODO implement here
-        return 0.0d;
+        return this.grandTotal;
     }
 
     /**
-     * @return
+     * @return this.itemList
      */
     public ArrayList<?> getItemList() {
         // TODO implement here
-        return null;
+        return this.itemList;
     }
 
 }
