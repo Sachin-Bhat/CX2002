@@ -145,4 +145,9 @@ public class Room implements Serializable {
      * @return
      */
     public String getView() {return this.view;}
+
+    //Utility function
+    public void levelNumToString(){
+        System.out.printf("%02d%n-%02d%n", r.getRLevel(), r.getRNo());
+    }
 }
