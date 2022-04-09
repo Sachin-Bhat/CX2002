@@ -70,14 +70,14 @@ public class Payment {
     public void invoiceSummary() {
         // TODO implement here
         System.out.println("\nHotel Checkout Invoice Summary");
-        System.out.println("Total Room Charge(Weekdays: "+ calcWeekdays() +", Weekends: "+ calcWeekends() +"): " + "$SGD" + calcRoomCharge());
-        if (rs.getRoomServiceList().size() != 0) {
+        System.out.println("Total Room Charge(Weekdays: "+ calcWeekdays() +", Weekends: "+ calcWeekends() +"): " + "$SGD" + calcRoomCost());
+        if (rez.getRSList().size() != 0) {
             System.out.println("Room Service Charges:");
             getRoomServicePriceList();
-            System.out.printf("Total Room Service Charge: + $SGD%.2f\n",rs.getRoomServicePrice());
+            System.out.printf("Total Room Service Charge: + $SGD%.2f\n",rez.getRSPrice());
         }
 
-        if(calculateDiscount() != 0)
+        if(calcDiscount() != 0)
             System.out.printf("Discount: - $SGD%.2f\n",calcDiscount());
         System.out.printf("Tax : + $SGD%.2f\n",calcTax());
         System.out.printf("Total bill is: $SGD%.2f",calcGrandTotal());
@@ -99,7 +99,7 @@ public class Payment {
      */
     private void getRoomServicePriceList() {
         // TODO implement here
-        ArrayList<RoomService> rsList = rez.getRoomServiceList();
+        ArrayList<RoomService> rsList = rez.getRSList();
         for (RoomService rs : rsList) {
             System.out.println("Room Service <"+ rsList.indexOf(rs)+1 +">");
             //during payment change all room service status to delivered.
@@ -130,10 +130,10 @@ public class Payment {
         // TODO implement here
         int updateChoice = -1;
         do {
-            payMenu();
-            uChoice = validateChoice(uChoice, "Enter choice: ");
+            paymentMenu();
+            updateChoice = verifyOption(updateChoice, "Enter an option: ");
 
-            switch (uChoice) {
+            switch (updateChoice) {
             case 1:
                 System.out.println("Payment Details:");
                 System.out.println("Paid by: Cash");
@@ -144,7 +144,7 @@ public class Payment {
             case 2:
                 System.out.println("Payment Details:");
                 System.out.println("Paid by: Credit Card");
-                System.out.println("Type: " + rez.getGuest().getCreditCard().getcType());
+                System.out.println("Type: " + rez.getGuest().getCreditCard().getCardType());
                 System.out.println("Name: " + rez.getGuest().getCreditCard().getName());
                 System.out.println("Address: " + rez.getGuest().getCreditCard().getAddress());
                 System.out.printf("Amount Billed: $%.2f\n",calcGrandTotal());
@@ -165,10 +165,10 @@ public class Payment {
     public int calcWeekends() {
         // TODO implement here
         int noWeekend = 0;
-        Period stayed = Period.between(rez.getCheckInDate(), rez.getCheckOutDate()); //Get the period between check in date and check out date.
+        Period stayed = Period.between(rez.getCheckIn(), rez.getCheckOut()); //Get the period between check in date and check out date.
         int totalDays = stayed.getDays(); //Calculate the total days between check in date and check out date.
         for(int d=0; d<totalDays; d++){
-            DayOfWeek day = DayOfWeek.of((rez.getCheckInDate().plusDays(d).get(ChronoField.DAY_OF_WEEK))); //Get the name of each day.
+            DayOfWeek day = DayOfWeek.of((rez.getCheckIn().plusDays(d).get(ChronoField.DAY_OF_WEEK))); //Get the name of each day.
             if(day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY)
                 noWeekend++;
         }
@@ -181,10 +181,10 @@ public class Payment {
     public int calcWeekdays() {
         // TODO implement here
         int noWeekday = 0;
-        Period stayed = Period.between(rez.getCheckInDate(), rez.getCheckOutDate()); //Get the period between check in date and check out date.
+        Period stayed = Period.between(rez.getCheckIn(), rez.getCheckOut()); //Get the period between check in date and check out date.
         int totalDays = stayed.getDays(); //Calculate the total days between check in date and check out date.
         for(int d=0; d<totalDays; d++){
-            DayOfWeek day = DayOfWeek.of((rez.getCheckInDate().plusDays(d).get(ChronoField.DAY_OF_WEEK))); //Get the name of each day.
+            DayOfWeek day = DayOfWeek.of((rez.getCheckIn().plusDays(d).get(ChronoField.DAY_OF_WEEK))); //Get the name of each day.
             if(day != DayOfWeek.SATURDAY && day != DayOfWeek.SUNDAY)
                 noWeekday++;
         }
@@ -197,10 +197,10 @@ public class Payment {
     public float calcRoomCost() {
         // TODO implement here
         float totalPrice = 0;
-        Period stayed = Period.between(rez.getCheckInDate(), rez.getCheckOutDate()); //Get the period between check in date and check out date.
+        Period stayed = Period.between(rez.getCheckIn(), rez.getCheckOut()); //Get the period between check in date and check out date.
         int totalDays = stayed.getDays(); //Calculate the total days between check in date and check out date.
         for(int d=0; d<totalDays; d++){
-            DayOfWeek day = DayOfWeek.of((rez.getCheckInDate().plusDays(d).get(ChronoField.DAY_OF_WEEK))); //Get the name of each day.
+            DayOfWeek day = DayOfWeek.of((rez.getCheckIn().plusDays(d).get(ChronoField.DAY_OF_WEEK))); //Get the name of each day.
             if(day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY){
                 totalPrice += rez.getRoom().getRate() * weekendRate;
 
@@ -218,7 +218,7 @@ public class Payment {
      */
     public double calcDiscount() {
         // TODO implement here
-        return (rez.getRoomServicePrice() + calcRoomCharge()) * discountRate;
+        return (rez.getRSPrice() + calcRoomCost()) * discountRate;
 
     }
 
@@ -227,7 +227,7 @@ public class Payment {
      */
     public double calcTax() {
         // TODO implement here
-        return (rez.getRoomServicePrice() + calcRoomCost() - calcDiscount()) * taxRate;
+        return (rez.getRSPrice() + calcRoomCost() - calcDiscount()) * taxRate;
 
     }
 
@@ -236,7 +236,7 @@ public class Payment {
      */
     public double calcGrandTotal() {
         // TODO implement here
-        return (rez.getRoomServicePrice() + calculateRoomCost() - calcDiscount()) + calcTax();
+        return (rez.getRSPrice() + calcRoomCost() - calcDiscount()) + calcTax();
 
     }
 
@@ -256,7 +256,7 @@ public class Payment {
      */
     public void setDiscountRate(double discountRate) {
         // TODO implement here
-        THIS.discountRate = discountRate;
+        this.discountRate = discountRate;
         return;
     }
 
