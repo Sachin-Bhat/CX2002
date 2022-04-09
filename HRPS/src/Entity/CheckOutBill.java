@@ -1,6 +1,3 @@
-/**
- * 
- */
 package Entity;
 
 import java.util.ArrayList;
@@ -10,50 +7,40 @@ import java.util.ArrayList;
  *
  */
 public class CheckOutBill extends Bill {
-	/**
-     * Default constructor
-     */
-    public CheckOutBill() {
-    }
 
-    /**
-     * 
-     */
     private int noWeekdays;
-
-    /**
-     * 
-     */
     private int noWeekends;
-
-    /**
-     * 
-     */
     private double roomCost;
-
-    /**
-     * 
-     */
     private double discount;
-
-    /**
-     * 
-     */
     private double taxAmt;
 
+    public CheckOutBill() {}
+    
     /**
      * @param rsList 
      * @param pay
      */
-    public void CheckOutBill(ArrayList<RoomService> rsList, Payment pay) {
+    public CheckOutBill(ArrayList<RoomService> rsList, Payment pay) {
         // TODO implement here
+    	super(rsList, pay.calcGrandTotal());
+    	this.noWeekdays = pay.calcWeekdays();
+    	this.noWeekends = pay.calcWeekends();
+    	this.roomCost = pay.calcRoomCost();
+    	this.discount = pay.calcDiscount();
+    	this.taxAmt = pay.calcTax();
     }
 
     /**
-     * @return
+     * print receipt
      */
     public void printReceipt() {
         // TODO implement here
-        return;
+        System.out.println("Receipt: ");
+        System.out.println("Weekdays stayed: " + noWeekdays);
+        System.out.println("Weekends stayed: " + noWeekends);
+        System.out.println("Room Cost: " + String.format("%.2f", roomCost));
+        System.out.println("Discount: " + String.format("%.2f", discount));
+        System.out.println("Tax Amt: " + String.format("%.2f", taxAmt));
+        System.out.println("Grand Total: " + String.format("%.2f", super.getGrandTotal()));
     }
 }

@@ -21,6 +21,9 @@ public class CreditCard implements Serializable {
     public String exp;
 
     /**
+     * Constructor for CreditCard
+     * Initialising a few variables.
+     *
      * @param name 
      * @param country 
      * @param address 
@@ -29,6 +32,7 @@ public class CreditCard implements Serializable {
      * @param cvv 
      * @param exp
      */
+  
     public CreditCard() {
     	
     }

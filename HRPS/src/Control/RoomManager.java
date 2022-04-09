@@ -1,13 +1,13 @@
-/**
- * 
- */
 package Control;
 
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import Entity.AvailabilityStatus;
+import Entity.BedType;
 import Entity.Room;
+import Entity.RoomType;
 
 /**
  * @author BHAT SACHIN <SACHIN008@e.ntu.edu.sg>
@@ -17,29 +17,11 @@ public class RoomManager {
 	/**
      * Default constructor
      */
-    public RoomManager() {
-    }
-
-    /**
-     * 
-     */
+    public RoomManager() {}
     private ArrayList<Room> roomList;
-
-    /**
-     * 
-     */
     private FileIOHandler fileIO = new FileIOHandler();
-
-    /**
-     * 
-     */
     private int count = 1;
-
-    /**
-     * 
-     */
     private Scanner sc;
-
     /**
      * Overloaded constructor for RoomManager
      * initialisation of a few variables (including setting the hotel layout and status/type initialisation logic)
@@ -51,6 +33,55 @@ public class RoomManager {
      */
     public RoomManager(Scanner sc) {
         // TODO implement here
+    	roomList = new ArrayList<Room>();
+		this.sc = sc;
+		Object[] objArray = fileIO.readObject(Room.class);
+		
+		if(objArray.length == 0) {
+			int roomNumber = 1;
+			 for (int i = 0; i < 48; i++) {
+				if (i == 6 || i == 12 || i == 18 || i == 24 || i == 36) {
+					roomNumber = 1;
+				}
+				if (i < 12) {
+					if (i < 6) {
+						roomList.add(new Room(count, RoomType.SINGLE, (float)150.00, BedType.SINGLE, AvailabilityStatus.VACANT, true, "great view", false, 2, roomNumber));
+						roomNumber++;
+					}
+					else {
+						roomList.add(new Room(count, RoomType.SINGLE, (float)175.00, BedType.DOUBLE, AvailabilityStatus.VACANT, true, "great view", false, 3, roomNumber));
+						roomNumber++;
+					}
+				}
+				else if (i >= 12 && i < 24){
+					if (i < 18) {
+						roomList.add(new Room(count, RoomType.DOUBLE, (float)200.00, BedType.SINGLE, AvailabilityStatus.VACANT, true, "great view", false, 4, roomNumber));
+						roomNumber++;
+					}
+					else {
+						roomList.add(new Room(count, RoomType.DOUBLE, (float)225.00, BedType.DOUBLE, AvailabilityStatus.VACANT, true, "great view", false, 5, roomNumber));
+						roomNumber++;
+					}
+				}
+				else if (i >= 24 && i < 36) {
+					roomList.add(new Room(count, RoomType.VIP, (float)250.00, BedType.MASTER, AvailabilityStatus.VACANT, true, "great view", false, 6, roomNumber));
+					roomNumber++;
+				}
+				else {
+					roomList.add(new Room(count, RoomType.DELUXE, (float)275.00, BedType.MASTER, AvailabilityStatus.VACANT, true, "nice view", false, 7, roomNumber));
+					roomNumber++;
+				}
+				count++;
+			}
+			fileIO.writeObject(roomList.toArray(), Room.class); 
+		}
+		else {
+			for (Object o : objArray) {
+				Room r = (Room) o;
+				roomList.add(r);
+			}
+			count = roomList.size() + 1;
+		}
     }
 
     /**
@@ -61,7 +92,28 @@ public class RoomManager {
      */
     private float assignRate(RoomType rType, BedType bType) {
         // TODO implement here
-        return 0.0f;
+    	if (rType.equals(RoomType.SINGLE)) {
+			if (bType.equals(BedType.SINGLE)) {
+				return 150;
+			}
+			else {
+				return 175;
+			}
+		}
+		else if (rType.equals(RoomType.DOUBLE)) {
+			if (bType.equals(BedType.SINGLE)) {
+				return 200;
+			}
+			else {
+				return 225;
+			}
+		}
+		else if (rType.equals(RoomType.VIP)) {
+			return 250;
+		}
+		else {
+			return 275;
+		}
     }
 
     /**
@@ -70,6 +122,14 @@ public class RoomManager {
      */
     private void roomTypeMenu() {
         // TODO implement here
+    	System.out.println("\n+-------------------+");
+		System.out.println("| Select room type: |");
+		System.out.println("| 1. Single         |");
+		System.out.println("| 2. Double         |");
+		System.out.println("| 3. VIP Suite      |");
+		System.out.println("| 4. Deluxe         |");
+		System.out.println("+-------------------+");
+		System.out.print("Enter option: ");
         return;
     }
 
@@ -101,7 +161,6 @@ public class RoomManager {
         // TODO implement here
         return null;
     }
-
     /**
      * menu for updating the availability status
      * @return
@@ -173,7 +232,7 @@ public class RoomManager {
      * @param r 
      * @return
      */
-    private void listRoomDetails(Room r) {
+    public void listRoomDetails(Room r) {
         // TODO implement here
         return;
     }
@@ -305,13 +364,14 @@ public class RoomManager {
     }
 
     /**
-     * convinient method to write to file
+     * Convenient method to write to file
      * nothing much, just a short hand of a method from FileIOHandler really
      * 
      * @return
      */
     public void writeToFile() {
         // TODO implement here
+    	fileIO.writeObject(roomList.toArray(), Room.class);
         return;
     }
 
@@ -336,6 +396,21 @@ public class RoomManager {
      */
     private float verifyRate(float rate, String input) {
         // TODO implement here
-        return 0.0f;
+    	boolean invalid = true;
+		
+		while (invalid) {
+			if (!sc.hasNextFloat()) {
+				System.out.println("Invalid rate. Please enter a rate");
+				sc.nextLine();	// clear the input in the buffer
+				System.out.print(input);
+			}
+			else {
+				invalid = false;
+				rate = sc.nextFloat();
+				sc.nextLine();	// clear the "\n" in the buffer
+			}
+		}
+		
+		return rate;
     }
 }
