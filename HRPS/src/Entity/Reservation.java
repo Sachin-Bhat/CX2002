@@ -1,6 +1,3 @@
-/**
- * 
- */
 package Entity;
 
 import java.io.Serializable;
@@ -17,302 +14,192 @@ import Entity.OrderStatus;
  *
  */
 public class Reservation implements Serializable {
-	/**
-     * Default constructor
-     */
-    public Reservation() {
-    }
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1234L;
 
-    /**
-     * 
-     */
-    private int rezCode;
-
-    /**
-     * 
-     */
-    private Guest guest;
-
-    /**
-     * 
-     */
-    private Room room;
-
-    /**
-     * 
-     */
-    private LocalDate checkIn;
-
-    /**
-     * 
-     */
-    private LocalDate checkOut;
-
-    /**
-     * 
-     */
-    private int noAdults;
-
-    /**
-     * 
-     */
-    private int noKids;
-
-    /**
-     * 
-     */
-    private ReservationStatus rezStatus;
-
-    /**
-     * 
-     */
-    private ArrayList<RoomService> rsList;
-
-    /**
-     * @param count
-     */
-    public Reservation(int count) {
-        // TODO implement here
-    }
-
-    /**
-     * @return
-     */
-    public int getRezCode() {
-        // TODO implement here
-        return 0;
-    }
-
-    /**
-     * @param guest 
-     * @return
-     */
-    public void setGuest(Guest guest) {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @return
-     */
-    public Guest getGuest() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param room 
-     * @return
-     */
-    public void setRoom(Room room) {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @return
-     */
-    public Room getRoom() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param checkIn 
-     * @return
-     */
-    public void setCheckIn(LocalDate checkIn) {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @return
-     */
-    public LocalDate getCheckIn() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param checkOut 
-     * @return
-     */
-    public void setCheckOut(LocalDate checkOut) {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @return
-     */
-    public LocalDate getCheckOut() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param noAdults 
-     * @return
-     */
-    public void setNoAdults(int noAdults) {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @return
-     */
-    public int getNoAdults() {
-        // TODO implement here
-        return 0;
-    }
-
-    /**
-     * @param noKids 
-     * @return
-     */
-    public void setNoKids(int noKids) {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @return
-     */
-    public int getNoKids() {
-        // TODO implement here
-        return 0;
-    }
-
-    /**
-     * @param rezStatus
-     */
-    public void setRezStatus(ReservationStatus rezStatus) {
-        // TODO implement here
-    }
-
-    /**
-     * @return
-     */
-    public ReservationStatus getRezStatus() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public void printRezDetails() {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @return
-     */
-    public void checkOut() {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @param response 
-     * @return
-     */
-    private String booleanToString(boolean response) {
-        // TODO implement here
-        return "";
-    }
-
-    /**
-     * @return
-     */
-    public void removeRoomOccupancy() {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @return
-     */
-    public void listRoomServices() {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @param rs 
-     * @return
-     */
-    public void addRoomService(RoomService rs) {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @param rs 
-     * @return
-     */
-    public void addRoomServiceWithoutPrintOrder(RoomService rs) {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @return
-     */
-    public ArrayList<RoomService> getRSList() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public void clearRSList() {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @return
-     */
-    public double getRSPrice() {
-        // TODO implement here
-        return 0.0d;
-    }
-
-    /**
-     * @param rsList 
-     * @return
-     */
-    public static double calcRoomService(ArrayList<RoomService> rsList) {
-        // TODO implement here
-        return 0.0d;
-    }
-
-    /**
-     * @param id 
-     * @return
-     */
-    public RoomService getRSById(int id) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param rs 
-     * @return
-     */
-    public void removeRoomService(RoomService rs) {
-        // TODO implement here
-        return;
-    }
-
+	private int rezCode;
+	private Guest guest;
+	private Room room;
+	private LocalDate checkIn;
+	private LocalDate checkOut;
+	
+	private int noAdults;
+	private int noKids;
+	
+	private ReservationStatus rezStatus;
+	
+	private ArrayList<RoomService> rsList;
+	
+	private static final long serialVersionUID = 1234L;
+	
+	public Reservation(int count) { //clarify on parameter
+		
+		
+		
+	}
+	
+	public int getRezCode() {
+		return this.rezCode;
+	}
+	
+	public void setGuest(Guest guest) {
+		this.guest = guest;
+		return;
+	}
+	
+	public Guest getGuest() {
+		return this.guest;
+	}
+	
+	public void setRoom(Room room) {
+		this.room = room;
+		return;
+	}
+	
+	
+	public Room getRoom() {
+		return this.room;
+	}
+	
+	public void setCheckIn(LocalDate checkIn) {
+		this.checkIn = checkIn;
+		return;
+	}
+	
+	public LocalDate getCheckIn() {
+		return this.checkIn;
+	}
+	
+	public void setCheckOut(LocalDate checkOut) {
+		this.checkOut = checkOut;
+	}
+	
+	public LocalDate getCheckOut() {
+		return this.checkOut;
+	}
+	
+	public void setNoAdults(int number) {
+		this.noAdults = number;
+		return;
+	}
+	
+	public int getNoAdults() {
+		return this.noAdults;
+	}
+	
+	public void setNoKids(int number) {
+		this.noKids = number;
+		return;
+	}
+	
+	public int getNoKids() {
+		return this.noKids;
+	}
+	
+	public void setRezStatus(ReservationStatus status) {
+		this.rezStatus = status;
+		return;
+	}
+	
+	public ReservationStatus getRezStatus() {
+		return this.rezStatus;
+	}
+	
+	public void printRezDetails() { 
+		System.out.printf("Reservation number: %d \n", this.rezCode);
+		System.out.printf("Guest name: %s \n", this.guest.getName()); //check how to access guest name
+		System.out.printf("Room number: %d \n", this.room.getId()); //check how to access room number
+		System.out.printf("Check-in date: %s \n", this.checkIn);
+		System.out.printf("Check-out date: %s \n", this.checkOut);
+		System.out.printf("Number of adults: %d \n", this.noAdults);
+		System.out.printf("Number of kids: %d \n", this.noKids);
+		System.out.printf("Reservation Status: %s \n", this.rezStatus);
+		return;
+	}
+	
+	
+	public void checkOut() {
+		//this.checkOut = LocalDate.now();
+		this.rezStatus = ReservationStatus.CHECKED_OUT;
+		return;
+	}
+	
+	private String booleanToString(boolean response) {
+		if (response) return "True";
+		else return "False";
+	}
+	
+	public void removeRoomOccupancy() { //shouldnt this be under Room?
+		this.guest = null;
+		this.noAdults = 0;
+		this.noKids = 0;
+		return;
+	}
+	
+	public void listRoomServices() {
+		int size = this.rsList.size();
+		for(int i=0; i<size; i++) {
+			System.out.printf("%s", this.rsList[i].getId()); //correct?
+		}
+		return;
+	}
+	
+	public void addRoomService(RoomService rs) {
+		this.rsList.add(rs);
+		//need sort?
+		return;
+	}
+	
+	public void addRoomServiceWithoutPrintOrder(RoomService rs) {
+		//dont know yet
+		return;
+	}
+	
+	public ArrayList<RoomService> getRSList() {
+		return this.rsList;
+	}
+	
+	public void clearRSList() {
+		this.rsList.clear();
+		this.rsList.trimToSize();
+		return;
+	}
+	
+	public double getRSPrice() {
+		double sum=0;
+		int size = this.rsList.size();
+		
+		for(int i=0; i<size; i++) {
+			 sum += this.rsList[i].getMenuItemGrandTotal();
+		}
+		return sum;
+		
+	}
+	
+	public double calcRoomService(ArrayList<RoomService> rsList) {
+		//dont know yet
+	}
+	
+	
+	public RoomService getRSById(int id) {
+		int size = this.rsList.size();
+		
+		for (int i=0; i<size; i++) {
+			if (this.rsList[i].getId() == id) return this.rsList[i];
+		}
+		
+		return null; //if not found
+		
+	}
+	
+	public void removeRoomService(RoomService rs) {
+		//first check if contains rs
+		if (this.rsList.contains(rs)) this.rsList.remove(rs);
+		return;
+	}
+	
+	
+	
+	
+}
+=======
 }
