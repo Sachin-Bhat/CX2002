@@ -84,6 +84,7 @@ public class GuestManager {
 		gender = sc.next().charAt(0);
 		
 		System.out.print("Enter the address: ");
+	    	sc.next();
 		address = sc.nextLine();
 		
 		System.out.print("Enter the country: ");
