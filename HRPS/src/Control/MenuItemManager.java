@@ -168,7 +168,6 @@ public class MenuItemManager {
 			do {
 				updateMenu();
 				option = sc.nextInt();
-				sc.nextLine();	// clear "\n" in the buffer
 				switch (option) {
 					case 0:
 						System.out.println("Going back...");
@@ -189,7 +188,6 @@ public class MenuItemManager {
 						System.out.print("Enter new price: $");
 						price = verifyPrice(price, "Enter new price: $");
 						item.setPrice(price);
-						sc.nextLine();	// clear the "\n" in the buffer
 						System.out.println("Menu Item updated");
 						fileIO.writeObject(mList.toArray(), MenuItem.class);
 						break;
