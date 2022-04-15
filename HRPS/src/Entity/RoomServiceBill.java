@@ -66,7 +66,7 @@ public class RoomServiceBill extends Bill {
 			try {
 				MenuItem item = (MenuItem) o;
 				System.out.println("Menu Item Ordered: " + item.getName());
-				System.out.printf("Price: $SGD%.2F\n", item.getPrice());
+				System.out.printf("Price: $SGD%.2f\n", item.getPrice());
 				System.out.println("------------------------------------------");
 			} 
 			
