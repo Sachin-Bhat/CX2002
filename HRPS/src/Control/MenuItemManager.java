@@ -128,7 +128,8 @@ public class MenuItemManager {
 				System.out.println("ID: " + item.getId());
 				System.out.println("Name: " + item.getName());
 				System.out.println("Description: " + item.getDescription());
-				System.out.printf("Price: $SGD%.2f\n" , item.getPrice() + "\n");
+				System.out.printf("Price: $SGD%.2f\n" , item.getPrice());
+				System.out.println();
 			}
 		}
         return;
