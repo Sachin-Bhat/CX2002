@@ -10,13 +10,14 @@ import java.util.Objects;
 import Entity.Reservation;
 import Entity.Room;
 import Entity.RoomService;
+import Entity.AvailabilityStatus;
 import Entity.Guest;
 import Entity.ReservationStatus;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+//import java.time.LocalDateTime;
 
 /**
  * @author BHAT SACHIN <SACHIN008@e.ntu.edu.sg>
@@ -76,6 +77,34 @@ public class ReservationManager {
      */
     public ReservationManager(GuestManager gMgr, RoomManager rMgr, RoomServiceManager rsMgr, Scanner sc) {
         // TODO implement here
+    	rezList = new ArrayList<Reservation>();
+		fileIO = new FileIOHandler();
+		this.gMgr = gMgr;
+		this.rMgr = rMgr;
+		this.rsMgr = rsMgr;
+		this.sc = sc;
+		
+		Object[] objList = fileIO.readObject(Reservation.class);
+		for (Object o : objList) {
+			Reservation rez = (Reservation) o;
+			Guest guest = gMgr.getGuestById(rez.getGuest().getGuestId());
+			Room room = rMgr.getRoomById(rez.getRoom().getId());
+			
+			// set the proper room service object
+			ArrayList<RoomService> rsList = rez.getRSList();
+			if (rsList.size() > 0) {
+				rez.clearRSList();
+				for (RoomService rs1 : rsList) {
+					RoomService rs = rsMgr.getRoomServiceById(rs1.getId());
+					rez.addRoomServiceWithoutPrintOrder(rs);
+				}
+			}
+			count = rezList.size() + 1;
+			
+			rez.setRoom(room);
+			rez.setGuest(guest);
+			rezList.add(rez);
+		}
     }
 
     /**
@@ -85,6 +114,55 @@ public class ReservationManager {
      */
     public void newReservation() {
         // TODO implement here
+    	Guest guest = gMgr.addGuest();
+		
+		// checking room
+		Room room = null;
+		String s;
+		int validRoom = 0;
+		while (Objects.equals(room, null)) {
+			rMgr.listRoomsByOccupancyRate();
+			
+			do {
+				System.out.print("Enter room number (level-number): ");
+				s = sc.nextLine();
+				validRoom = verifyRoom(s);
+			} while (validRoom < 1);
+			
+			room = rMgr.returnVacantRoom(s);
+		}
+		
+		Reservation rez = new Reservation(count);
+		count++;
+		int noAdults = 0;
+		int noKids = 0;
+		
+		// set the check in date and reservation status
+		System.out.print("Enter check in date (yyyymmdd): ");
+		DateTimeFormatter dateFormatter = DateTimeFormatter.BASIC_ISO_DATE;
+		String time = "";
+		time  = verifyTime(time, dateFormatter, "Enter date (yyyymmdd): ");
+		rez.setCheckIn(LocalDate.parse(time, dateFormatter));
+		rez.setRezStatus(ReservationStatus.CONFIRMED);
+		room.setAvailStatus(AvailabilityStatus.RESERVED);
+		
+		rMgr.writeToFile();
+		rez.setGuest(guest);
+		rez.setRoom(room);
+		
+		// set the no of adults and children
+		System.out.print("Enter no of adults: ");
+		noAdults = verifyOption(noAdults, "Enter no of adults: ");
+		rez.setNoAdults(noAdults);
+		System.out.print("Enter no of kids: ");
+		noKids = verifyOption(noKids, "Enter no of kids: ");
+		rez.setNoKids(noKids);
+				
+		rezList.add(rez);
+		
+		fileIO.writeObject(rezList.toArray(), Reservation.class);
+		
+		rez.printRezDetails();
         return;
     }
 
@@ -95,7 +173,21 @@ public class ReservationManager {
      */
     public Reservation searchReservation() {
         // TODO implement here
-        return null;
+    	String name;
+		Reservation rez = null;
+		
+		System.out.print("Enter guest's name: ");
+		name = sc.nextLine();
+		
+		for (Reservation tmp : rezList) {
+			if (tmp.getGuest().getName().equals(name)) {
+				rez = tmp;
+				break;
+			}
+		}
+		
+		return rez;
+        
     }
 
     /**
@@ -105,6 +197,43 @@ public class ReservationManager {
      */
     public void updateReservation() {
         // TODO implement here
+    	int option = -1;
+		Reservation rez = searchReservation();
+		
+		if (Objects.equals(rez, null)) {
+			System.out.println("Reservation does not exist");
+			return;
+		}
+		do {
+			updateReservationMenu();
+			option = verifyOption(option, "Enter an option: ");
+			switch(option) {
+				case 0:
+					System.out.println("Going back...");
+					break;
+				case 1:
+					gMgr.updateDetailsGuest(rez.getGuest());
+					fileIO.writeObject(rezList.toArray(), Reservation.class);
+					break;
+				case 2:
+					int noAdults = 0;
+					System.out.print("Enter no of adults: ");
+					noAdults = verifyOption(noAdults, "Enter no of adults: ");
+					rez.setNoAdults(noAdults);
+					fileIO.writeObject(rezList.toArray(), Reservation.class);
+					break;
+				case 3:
+					int noKids = 0;
+					System.out.print("Enter no of kids: ");
+					noKids = verifyOption(noKids, "Enter no of kids: ");
+					rez.setNoKids(noKids);
+					fileIO.writeObject(rezList.toArray(), Reservation.class);
+					break;
+				default:
+					System.out.println("No such option");
+					break;
+			}
+		} while (option != 0 && option != 1 && option != 2);
         return;
     }
 
@@ -114,6 +243,14 @@ public class ReservationManager {
      */
     private void updateReservationMenu() {
         // TODO implement here
+    	System.out.println("\n~--------------------------------~");
+		System.out.println("! What needs to be updated:      !");
+		System.out.println("! 0. Nothing                     !");
+		System.out.println("! 1. Update Guest Details        !");
+		System.out.println("! 2. No of adults                !");
+		System.out.println("! 3. No of children              !");
+		System.out.println("~--------------------------------~");
+		System.out.print("Enter an option: ");
         return;
     }
 
@@ -125,6 +262,18 @@ public class ReservationManager {
      */
     public void removeReservation() {
         // TODO implement here
+    	Reservation rez = searchReservation();
+		
+		if(Objects.equals(rez, null)) {
+			System.out.println("Reservation does not exist");
+		}
+		else {
+			rez.removeRoomOccupancy();
+			rezList.remove(rez);
+			fileIO.writeObject(rezList.toArray(), Reservation.class);
+			rMgr.writeToFile();
+			System.out.println("Reservation removed successfully");
+		}
         return;
     }
 
@@ -135,6 +284,14 @@ public class ReservationManager {
      */
     public void printReservation() {
         // TODO implement here
+    	Reservation rez = searchReservation();
+		
+		if(Objects.equals(rez, null)) {
+			System.out.println("Reservation does not exist");
+		}
+		else {
+			rez.printRezDetails();
+		}
         return;
     }
 
@@ -144,6 +301,16 @@ public class ReservationManager {
      */
     public void printAllReservations() {
         // TODO implement here
+    	for (Reservation rez : rezList) {
+			//if the date of the reservation check in has passed
+			if(rez.getCheckIn().isBefore(LocalDate.now())) {
+				//set reservation status to expired.
+				rez.setRezStatus(ReservationStatus.EXPIRED);
+			}
+			if (rez.getRezStatus() != ReservationStatus.EXPIRED) {
+				rez.printRezDetails();
+			}
+		}
         return;
     }
 
@@ -156,6 +323,8 @@ public class ReservationManager {
      */
     public void addRoomService(Reservation rez, RoomService rs) {
         // TODO implement here
+    	rez.addRoomService(rs);
+		fileIO.writeObject(rezList.toArray(), Reservation.class);
         return;
     }
 
@@ -167,7 +336,22 @@ public class ReservationManager {
      */
     private int verifyOption(int option, String input) {
         // TODO implement here
-        return 0;
+    	boolean invalid = true;
+		
+		while (invalid) {
+			if (!sc.hasNextInt()) {
+				System.out.println("Invalid Input. Please enter an integer");
+				sc.nextLine();	// clear the input in the buffer
+				System.out.print(input);
+			}
+			else {
+				invalid = false;
+				option = sc.nextInt();
+				sc.nextLine();	// clear the "\n" in the buffer
+			}
+		}
+		
+		return option;
     }
 
     /**
@@ -179,7 +363,24 @@ public class ReservationManager {
      */
     private int verifyRoom(String room) {
         // TODO implement here
-        return 0;
+    	int isNum1 = 0, isNum2 = 0;
+		if (!room.contains("-")) {
+			System.out.println("Invalid room");
+			return 0;
+		}
+		else {
+			String[] part = room.split("-");
+			if (part.length == 2) {
+				isNum1 = isInt(part[0]);
+				isNum2 = isInt(part[1]);
+			}
+			if (isNum1==0 || isNum2==0) {
+				System.out.println("Invalid room");
+				return 0;
+			}
+		}
+		return 1;
+        
     }
 
     /**
@@ -189,7 +390,14 @@ public class ReservationManager {
      */
     private int isInt(String input) {
         // TODO implement here
-        return 0;
+    	try {
+			Integer.parseInt(input);
+			return 1;
+		}
+		catch (Exception exception) {
+			return 0;
+		}
+        
     }
 
     /**
@@ -199,6 +407,31 @@ public class ReservationManager {
      */
     public void removeRoomService() {
         // TODO implement here
+    	Reservation reZ = searchReservation();
+		if (Objects.equals(reZ, null)) {
+			System.out.println("Reservation does not exist");
+			return;
+		}
+		else {
+			reZ.listRoomServices();
+			if (reZ.getRSList().size() == 0) {
+				return;
+			}
+			else {
+				int id = -1;
+				System.out.print("Enter room service id: ");
+				id = verifyOption(id, "Enter room service id: ");
+				RoomService rs = reZ.getRSById(id);
+				if (Objects.equals(rs, null)) {
+					System.out.println("Room Service does not exist");
+				}
+				else {
+					rsMgr.removeRoomService(rs);
+					reZ.removeRoomService(rs);
+					fileIO.writeObject(rezList.toArray(), Reservation.class);
+				}
+			}
+		}
         return;
     }
 
@@ -208,6 +441,29 @@ public class ReservationManager {
      */
     public void updateRoomService() {
         // TODO implement here
+    	Reservation rez = searchReservation();
+		if (Objects.equals(rez, null)) {
+			System.out.println("Reservation does not exist");
+			return;
+		}
+		else {
+			rez.listRoomServices();
+			if (rez.getRSList().size() == 0) {
+				return;
+			}
+			else {
+				int id = -1;
+				System.out.print("Enter room service id: ");
+				id = verifyOption(id, "Enter room service id: ");
+				RoomService rs = rez.getRSById(id);
+				if (Objects.equals(rs, null)) {
+					System.out.println("Room Service does not exist");
+				}
+				else {
+					rsMgr.updateRoomService(rs);
+				}
+			}
+		}
         return;
     }
 
@@ -217,6 +473,13 @@ public class ReservationManager {
      */
     public void printRoomService() {
         // TODO implement here
+    	Reservation rez = searchReservation();
+		if (Objects.equals(rez, null)) {
+			System.out.println("Reservation does not exist");
+		}
+		else {
+			rez.listRoomServices();
+		}
         return;
     }
 
@@ -225,10 +488,28 @@ public class ReservationManager {
      * @param time 
      * @param date 
      * @param input
+     * @return 
      * @return time
      */
-    private void verifyTime(String time, DateTimeFormatter date, String input) {
+    private String verifyTime(String time, DateTimeFormatter date, String input) {
         // TODO implement here
+    	boolean invalid = true;
+		time = sc.nextLine();
+		
+		while (invalid) {
+			try {
+				LocalDate.parse(time, date);
+			}
+			catch (DateTimeParseException exception) {
+				invalid = true;
+				System.out.println("Invalid date. Please enter a valid date (yyyymmdd).");
+				System.out.print(input);
+				time = sc.nextLine();
+				continue;
+			}
+			invalid = false;
+		}
+		return time;
     }
 
     /**
@@ -238,6 +519,48 @@ public class ReservationManager {
      */
     public void checkIn() {
         // TODO implement here
+    	Guest guest = gMgr.addGuest();
+		
+		// checking room
+		Room room = null;
+		String s;
+		int validRoom = 0;
+		while (Objects.equals(room, null)) {
+			rMgr.listRoomsByOccupancyRate();
+			
+			do {
+				System.out.print("Enter room number (level-number): ");
+				s = sc.nextLine();
+				validRoom = verifyRoom(s);
+			} while (validRoom < 1);
+			
+			room = rMgr.returnVacantRoom(s);
+		}
+		
+		Reservation r = new Reservation(count);
+		int noOfAdults = 0, noOfChildren = 0;
+		
+		r.setCheckIn(LocalDate.now());
+		r.setRezStatus(ReservationStatus.CHECKED_IN);
+		room.setAvailStatus(AvailabilityStatus.OCCUPIED);
+		
+		rMgr.writeToFile();
+		r.setGuest(guest);
+		r.setRoom(room);
+		
+		// set the no of adults and children
+		System.out.print("Enter no of adults: ");
+		noOfAdults = verifyOption(noOfAdults, "Enter no of adults: ");
+		r.setNoAdults(noOfAdults);
+		System.out.print("Enter no of kids: ");
+		noOfChildren = verifyOption(noOfChildren, "Enter no of kids: ");
+		r.setNoKids(noOfChildren);
+				
+		rezList.add(r);
+		
+		fileIO.writeObject(rezList.toArray(), Reservation.class);
+		
+		r.printRezDetails();
         return;
     }
 
@@ -249,6 +572,22 @@ public class ReservationManager {
      */
     public void checkIn(Reservation rez) {
         // TODO implement here
+    	if (Objects.equals(rez, null)) {
+			System.out.println("Reservation does not exist");
+			return;
+		}
+		else {
+			if (rez.getRezStatus() == ReservationStatus.CONFIRMED) {
+				rez.setRezStatus(ReservationStatus.CHECKED_IN);
+				rez.getRoom().setAvailStatus(AvailabilityStatus.OCCUPIED);
+				fileIO.writeObject(rezList.toArray(), Reservation.class);
+				rMgr.writeToFile();
+				System.out.println("Guest checked in successfully");
+			}
+			else {
+				System.out.println("Reservation does not exist");
+			}
+		}
         return;
     }
 
@@ -258,6 +597,14 @@ public class ReservationManager {
      */
     public void expireReservation() {
         // TODO implement here
+    	Reservation rez = searchReservation();
+		if (Objects.equals(rez, null)) {
+			System.out.println("Reservation does not exist");
+			return;
+		}
+		else {
+			rez.setRezStatus(ReservationStatus.EXPIRED);
+		}
         return;
     }
 
@@ -268,6 +615,21 @@ public class ReservationManager {
      */
     public Reservation checkOut() {
         // TODO implement here
-        return null;
+    	Reservation rez = null;
+		rez = searchReservation();
+		if (Objects.equals(rez, null)) {
+			System.out.println("Reservation does not exist");
+			return rez;
+		}
+		else {
+			rez.getRoom().setAvailStatus(AvailabilityStatus.VACANT);
+			rez.setCheckOut(LocalDate.now());
+			rez.setRezStatus(ReservationStatus.CHECKED_OUT);
+			
+			fileIO.writeObject(rezList.toArray(), Reservation.class);
+			rMgr.writeToFile();
+			
+			return rez;
+		}
     }
 }

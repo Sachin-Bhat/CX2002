@@ -42,8 +42,8 @@ public class Room implements Serializable {
     public Room(int id, RoomType rType, float rate, BedType bType, AvailabilityStatus availStatus, boolean hasWifi, boolean isSmoking, String view, int rLevel, int rNo) {
         this.id = id;
         this.rType = rType;
-        this.rate rate;
-        this.bType bType;
+        this.rate = rate;
+        this.bType = bType;
         this.availStatus = availStatus;
         this.hasWifi = hasWifi;
         this.isSmoking = isSmoking;

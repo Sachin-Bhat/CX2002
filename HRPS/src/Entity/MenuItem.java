@@ -18,20 +18,27 @@ public class MenuItem implements Serializable {
     private String description;
     private int id;
     private float price;
-
+    
+    /**
+     *  default constructor utilises super class
+     */
+    public MenuItem() {
+    	super();
+    }
     /**
      * @param id 
      * @param name 
      * @param description 
      * @param price
      */
-    public MenuItem() {
-    	
-    }
     public MenuItem(int id, String name, String description, float price) {
         // TODO implement here
+    	this.id = id;
+  	  	this.name = name;
+  	  	this.description = description;
+  	  	this.price = price;
     }
-    
+    // accessors and mutators
 	public String getName() {
 		return name;
 	}

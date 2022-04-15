@@ -26,6 +26,7 @@ public class CheckOutBill extends Bill {
     	this.noWeekdays = pay.calcWeekdays();
     	this.noWeekends = pay.calcWeekends();
     	this.roomCost = pay.calcRoomCost();
+    	this.discount = pay.getDiscountRate();
     	this.discount = pay.calcDiscount();
     	this.taxAmt = pay.calcTax();
     }
@@ -35,11 +36,26 @@ public class CheckOutBill extends Bill {
      */
     public void printReceipt() {
         // TODO implement here
-        System.out.println("Receipt: ");
+        System.out.println("Checkout Receipt: ");
         System.out.println("Weekdays stayed: " + noWeekdays);
         System.out.println("Weekends stayed: " + noWeekends);
         System.out.println("Room Cost: " + String.format("%.2f", roomCost));
-        System.out.println("Discount: " + String.format("%.2f", discount));
+        if (this.itemList.size() != 0) {
+			System.out.println("Room Service Charge:");
+			
+			float rsTotal = 0;
+			for(Object o: this.itemList) {
+				if(o instanceof RoomService) {
+					RoomService rs = (RoomService) o;
+					RoomServiceBill rsBill = new RoomServiceBill(rs.getmList(), (RoomService)o);
+					rsTotal += rs.getMenuItemGrandTotal();
+					rsBill.printReceipt();		
+				}
+			}
+			System.out.printf("Total Room Service Charge: + $SGD%.2f\n",rsTotal);
+		}
+        if(discount != 0)
+        	System.out.println("Discount: " + String.format("%.2f", discount));
         System.out.println("Tax Amt: " + String.format("%.2f", taxAmt));
         System.out.println("Grand Total: " + String.format("%.2f", super.getGrandTotal()));
     }

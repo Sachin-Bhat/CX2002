@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Entity.CardType;
-import Entity.CreditCard;
+//import Entity.CreditCard;
 import Entity.Guest;
 
 /**
@@ -457,7 +457,7 @@ public class GuestManager {
      * @param guestId 
      * @return
      */
-    private Guest getGuestById(int guestId) {
+    public Guest getGuestById(int guestId) {
         // TODO implement here
     	Guest guest = null;
 		

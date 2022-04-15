@@ -33,15 +33,17 @@ public class Guest implements Serializable {
      * @param nationality 
      * @param contactNo
      */
-    public Guest(int guestId, String id, String name, String address, String country, char gender, String nationality, long contactNo) {
+    public Guest(int guestId, String id, String name, String address, String country, char gender, String nationality, long contactNo, CardType cType, long cardNo, int cvv, String exp) {
         this.guestId = guestId;
         this.id = id;
         this.name = name;
+        this.card = new CreditCard(name, address, country, cType, cardNo, cvv, exp);
         this.address = address;
         this.country = country;
         this.gender = gender;
         this.nationality = nationality;
         this.contactNo = contactNo;
+        
     }
     //SETTER METHODS
     /**
