@@ -26,13 +26,13 @@ public class RoomService implements Serializable {
     
     public RoomService(ArrayList<MenuItem> mList, LocalDate dateTime, String remarks, int id) {
     	this.mList = new ArrayList<MenuItem>();
-		this.orderStatus = OrderStatus.PREPARING;
+		this.orderStatus = OrderStatus.CONFIRMED;
 	}
     
     
     public RoomService() {
 		// TODO Auto-generated constructor stub
-	    	this.orderStatus = OrderStatus.PREPARING;
+	    	this.orderStatus = OrderStatus.CONFIRMED;
 	}
 
 
