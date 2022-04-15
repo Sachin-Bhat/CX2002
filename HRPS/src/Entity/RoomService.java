@@ -32,6 +32,7 @@ public class RoomService implements Serializable {
     
     public RoomService() {
 		// TODO Auto-generated constructor stub
+	    	this.orderStatus = OrderStatus.PREPARING;
 	}
 
 
