@@ -13,7 +13,7 @@ import Entity.RoomType;
  * @author BHAT SACHIN <SACHIN008@e.ntu.edu.sg>
  *
  */
-public class RoomManager {
+public class RoomManager extends Manager{
 	/**
      * Default constructor
      */
@@ -742,7 +742,7 @@ public class RoomManager {
      * @param input 
      * @return
      */
-    private int verifyOption(int option, String input) {
+    protected int verifyOption(int option, String input) {
         // TODO implement here
     	boolean invalid = true;
 		

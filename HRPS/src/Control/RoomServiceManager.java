@@ -14,7 +14,7 @@ import Entity.OrderStatus;
 /**
  *
  */
-public class RoomServiceManager {
+public class RoomServiceManager extends Manager{
 	
     private ArrayList<RoomService> rsList;
     private FileIOHandler fileIO;
@@ -147,7 +147,7 @@ public class RoomServiceManager {
      * @param input 
      * @return
      */
-    private int verifyOption(int option, String input) {
+    protected int verifyOption(int option, String input) {
         // TODO implement here
     	boolean invalid = true;
 		

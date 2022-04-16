@@ -14,7 +14,7 @@ import Entity.Guest;
  * @author BHAT SACHIN <SACHIN008@ntu.edu.sg>
  *
  */
-public class GuestManager {
+public class GuestManager extends Manager{
 	/**
      * Default constructor for GuestManager
      */
@@ -478,7 +478,7 @@ public class GuestManager {
      * @param input 
      * @return option
      */
-    private int verifyOption(int option, String input) {
+    protected int verifyOption(int option, String input) {
         // TODO implement here
     	boolean invalid = true;
 		

@@ -23,7 +23,7 @@ import java.time.LocalDate;
  * @author BHAT SACHIN <SACHIN008@e.ntu.edu.sg>
  *
  */
-public class ReservationManager {
+public class ReservationManager extends Manager{
 	/**
      * Default constructor
      */
@@ -334,7 +334,7 @@ public class ReservationManager {
      * @param input 
      * @return
      */
-    private int verifyOption(int option, String input) {
+    protected int verifyOption(int option, String input) {
         // TODO implement here
     	boolean invalid = true;
 		
