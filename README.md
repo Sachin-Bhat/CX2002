@@ -1,9 +1,9 @@
 # CX2002
 ---
+# Hotel Reservation & Payment System
+### These contain the files needed for our project.
 
-These contain the files needed for our project.
-
-## Roles
+## Authors
 ---
 
 1. @Sachin-Bhat      &#8594; Guest | IdentityType | HotelApp
@@ -12,12 +12,20 @@ These contain the files needed for our project.
 4. @sunwen_12        &#8594; Payment | PaymentType
 5. @SigmaProtogen    &#8594; RoomService + Related Classes
 
-**Please help each other out in case of difficulty. Though these are roles, they are *NOT* strictly speaking - rigid.**
-
-## #TODO
+## Setup Instruction
 ---
 
-> ### By 21st March, 2022
-> > Finalise UML design (**including relationships and methods**).
-> > Generate Java Code using the UML tool.
-> > 
+Folder HRPS is a Java Eclipse Project and can be imported as such
+
+In folder HRPS are 5 text files
+> class Entity.Guest.txt  
+> class Entity.MenuItem.txt  
+> class Entity.Reservation.txt  
+> class Entity.Room.txt  
+> class Entity.RoomService.txt  
+
+These will save information during program runtime. If not found, program will generate upon startup.
+
+For fresh start, delete the text files to erase all prior information.
+
+Otherwise, information will be stored between instances
