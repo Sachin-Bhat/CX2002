@@ -37,7 +37,7 @@ public class Guest implements Serializable {
         this.guestId = guestId;
         this.id = id;
         this.name = name;
-        this.card = new CreditCard(name, address, country, cType, cardNo, cvv, exp);
+        this.card = new CreditCard(name, country, address, cType, cardNo, cvv, exp);
         this.address = address;
         this.country = country;
         this.gender = gender;

@@ -69,7 +69,7 @@ public class GuestManager {
         // TODO implement here
     	Guest guest = null;
     	char gender;
-		String id, name, address, country, nationality, exp = "";
+		String id, name, address, country, nationality, exp = "", genderstr;
 		int cvv = 0;
 		long cardNo = 0, contactNo = 0;
 		CardType cType = null;
@@ -81,10 +81,10 @@ public class GuestManager {
 		id = sc.nextLine();
 		
 		System.out.print("Enter the gender(M/F): ");
-		gender = sc.next().charAt(0);
+		genderstr = sc.nextLine();
+		gender = genderstr.charAt(0);
 		
 		System.out.print("Enter the address: ");
-	    	sc.next();
 		address = sc.nextLine();
 		
 		System.out.print("Enter the country: ");

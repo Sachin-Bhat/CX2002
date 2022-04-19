@@ -33,7 +33,7 @@ public class HotelApp {
     /**
      * @return
      */
-    public static void main() {
+    public static void main(String[] args) {
         // TODO implement here
     	Scanner sc = new Scanner(System.in);
 		RoomManager rMgr = new RoomManager(sc);
